@@ -1,0 +1,35 @@
+{
+  "name": "omni-mobile-framework",
+  "scripts": {
+    "start:mock-server": "npx serve public -p 3000 -s",
+    "android:real": "playwright test --project=android-real",
+    "android:emulator": "playwright test --headed --project=android-emulator",
+    "ios:real": "playwright test --project=ios-real",
+    "ios:simulator": "playwright test --project=ios-simulator",
+    "browserstack": "playwright test --project=browserstack",
+    "parallel": "playwright test --workers=4",
+    "report": "allure generate allure-results -o allure-report && allure open allure-report",
+    "generate:tests": "tsx src/services/llm-generator.ts"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@types/crypto-js": "^4.2.2",
+    "@types/express": "^5.0.6",
+    "@types/fluent-ffmpeg": "^2.1.28",
+    "@types/node": "^25.5.0",
+    "allure-commandline": "^2.38.1",
+    "allure-js-commons": "^2.10.0",
+    "allure-playwright": "^3.6.0",
+    "playwright": "^1.41.0"
+  },
+  "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "axios": "^1.6.0",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^17.3.1",
+    "ffmpeg-static": "^5.2.0",
+    "fluent-ffmpeg": "^2.1.2",
+    "typescript": "^5.3.0",
+    "zod": "^3.22.0"
+  }
+}
