@@ -30,8 +30,8 @@ export default defineConfig({
     {
       name: 'android-emulator',
       use: { 
-        ...devices['iPhone 13 Pro Max'],
-   //     ...config.androidEmulator
+        ...devices['Pixel 5'],
+        ...config.androidEmulator
       },
     },
     {
@@ -39,6 +39,12 @@ export default defineConfig({
       use: { 
         ...devices['iPhone 14'],
         ...config.iosReal
+      },
+    },
+    {
+      name: 'chrome-web',
+      use: { 
+        //...devices['Desktop Chrome'],
       },
     },
     {

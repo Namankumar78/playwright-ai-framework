@@ -17,7 +17,7 @@ export const config = {
   },
 
   iosReal: {
-    channel: 'safari',
+    channel: 'webkit',
     launchOptions: {
       args: ['--disable-web-security']
     }

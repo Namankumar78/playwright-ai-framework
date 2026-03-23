@@ -4,7 +4,7 @@
     "start:mock-server": "npx serve public -p 3000 -s",
     "android:real": "playwright test --project=android-real",
     "android:emulator": "playwright test --headed --project=android-emulator",
-    "ios:real": "playwright test --project=ios-real",
+    "ios:real": "playwright test --headed --project=ios-real",
     "ios:simulator": "playwright test --project=ios-simulator",
     "browserstack": "playwright test --project=browserstack",
     "parallel": "playwright test --workers=4",
