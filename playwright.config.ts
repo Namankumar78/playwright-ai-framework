@@ -1,62 +1,40 @@
-import { defineConfig, devices } from '@playwright/test';
-import { config } from './src/config/devices';
+import { defineConfig } from '@playwright/test';
+
+export const aimodel = 'gemini-3.1-flash-lite-preview';
+
+//gemini-3-flash-preview
+//gemini-3.1-flash-lite-preview
 
 export default defineConfig({
+  testDir: './playwright/tests',
   outputDir: 'recordings',
-  testDir: './src/tests',
   fullyParallel: true,
   forbidOnly: !!process.env.CI,
   retries: process.env.CI ? 2 : 0,
   workers: process.env.CI ? 4 : undefined,
-  reporter: [
+  timeout: 30 * 1000,
+
+reporter: [
     ['html'],
-  //  ['allure-playwright'],
+    ['list'],
+    ['allure-playwright'],
     ['json', { outputFile: 'test-results.json' }]
   ],
-  use: {
-     video: 'on',
-     baseURL: "https://the-internet.herokuapp.com/login",
-     trace: 'on-first-retry',
-     screenshot: 'only-on-failure',
-    // launchOptions: {
-    //   slowMo: 100,
-    // },
+use: { 
+    video: 'on',
+    baseURL: "https://the-internet.herokuapp.com/login",
+    trace: 'on-first-retry',
+    screenshot: 'only-on-failure',
+    headless: true,
+    viewport: { width: 1280, height: 720 },
+    actionTimeout: 10 * 1000,
+    ignoreHTTPSErrors: true,
   },
-  projects: [
-    //{
-    //   name: 'android-real',
-    //   use: { 
-    //     ...devices['Pixel_5'],
-    //     ...config.androidReal
-    //   },
-    // },
-    // {
-    //   name: 'android-emulator',
-    //   use: { 
-    //     ...devices['Pixel 5'],
-    //     ...config.androidEmulator
-    //   },
-    // },
-    // {
-    //   name: 'ios-real',
-    //   use: { 
-    //     ...devices['iPhone 14'],
-    //     ...config.iosReal
-    //   },
-    // },
+
+projects: [
     {
-      name: 'chrome-web',
-      use: { 
-        //...devices['Desktop Chrome'],
-      },
+      name: 'chromium',
+    //  use: { browserName: 'chromium' },
     },
-    // {
-    //   name: 'browserstack-android',
-    //   use: config.browserstackAndroid,
-    // },
-    // {
-    //   name: 'browserstack-ios',
-    //   use: config.browserstackiOS,
-    // }
-  ]
+  ],
 });

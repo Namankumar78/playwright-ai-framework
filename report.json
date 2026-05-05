@@ -1,0 +1,74 @@
+{
+  "config": {
+    "configFile": "D:\\Repos\\playwright-ai-framework\\playwright.config.ts",
+    "rootDir": "D:/Repos/playwright-ai-framework/playwright/tests",
+    "forbidOnly": false,
+    "fullyParallel": true,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {},
+    "preserveOutput": "always",
+    "projects": [
+      {
+        "outputDir": "D:/Repos/playwright-ai-framework/recordings",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {},
+        "id": "chromium",
+        "name": "chromium",
+        "testDir": "D:/Repos/playwright-ai-framework/playwright/tests",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 30000
+      }
+    ],
+    "quiet": false,
+    "reporter": [
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "shard": null,
+    "tags": [],
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.59.1",
+    "workers": 10,
+    "webServer": null
+  },
+  "suites": [],
+  "errors": [
+    {
+      "message": "Error: Cannot find module './LabsPage'\nRequire stack:\n- D:\\Repos\\playwright-ai-framework\\playwright\\tests\\labsSearch.spec.ts\n- D:\\Repos\\playwright-ai-framework\\node_modules\\playwright\\lib\\transform\\transform.js\n- D:\\Repos\\playwright-ai-framework\\node_modules\\playwright\\lib\\common\\configLoader.js\n- D:\\Repos\\playwright-ai-framework\\node_modules\\playwright\\lib\\testActions.js\n- D:\\Repos\\playwright-ai-framework\\node_modules\\playwright\\lib\\program.js\n- D:\\Repos\\playwright-ai-framework\\node_modules\\@playwright\\test\\cli.js",
+      "stack": "Error: Cannot find module './LabsPage'\nRequire stack:\n- D:\\Repos\\playwright-ai-framework\\playwright\\tests\\labsSearch.spec.ts\n- D:\\Repos\\playwright-ai-framework\\node_modules\\playwright\\lib\\transform\\transform.js\n- D:\\Repos\\playwright-ai-framework\\node_modules\\playwright\\lib\\common\\configLoader.js\n- D:\\Repos\\playwright-ai-framework\\node_modules\\playwright\\lib\\testActions.js\n- D:\\Repos\\playwright-ai-framework\\node_modules\\playwright\\lib\\program.js\n- D:\\Repos\\playwright-ai-framework\\node_modules\\@playwright\\test\\cli.js\n    at Object.<anonymous> (D:\\Repos\\playwright-ai-framework\\playwright\\tests\\labsSearch.spec.ts:2:1)",
+      "location": {
+        "file": "D:\\Repos\\playwright-ai-framework\\playwright\\tests\\labsSearch.spec.ts",
+        "column": 1,
+        "line": 2
+      },
+      "snippet": "\u001b[90m   at \u001b[39mlabsSearch.spec.ts:2\n\n\u001b[0m \u001b[90m 1 |\u001b[39m \u001b[36mimport\u001b[39m { test } \u001b[36mfrom\u001b[39m \u001b[32m'@playwright/test'\u001b[39m\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 2 |\u001b[39m \u001b[36mimport\u001b[39m { \u001b[33mLabsPage\u001b[39m } \u001b[36mfrom\u001b[39m \u001b[32m'./LabsPage'\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m   |\u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 3 |\u001b[39m\n \u001b[90m 4 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m'1mg Labs Search Functionality'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n \u001b[90m 5 |\u001b[39m   \u001b[36mlet\u001b[39m labsPage\u001b[33m:\u001b[39m \u001b[33mLabsPage\u001b[39m\u001b[33m;\u001b[39m\u001b[0m"
+    },
+    {
+      "message": "Error: No tests found",
+      "stack": "Error: No tests found"
+    }
+  ],
+  "stats": {
+    "startTime": "2026-05-05T13:31:14.941Z",
+    "duration": 78.48700000000008,
+    "expected": 0,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
