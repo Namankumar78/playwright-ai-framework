@@ -1,7 +1,10 @@
 import { defineConfig } from '@playwright/test';
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import dotenv from 'dotenv';
+dotenv.config();
 
-export const aimodel = 'gemini-3.1-flash-lite-preview';
-
+const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
+export const model = genAI.getGenerativeModel({ model: "gemini-3.1-flash-lite-preview" });
 //gemini-3-flash-preview
 //gemini-3.1-flash-lite-preview
 
@@ -22,11 +25,15 @@ reporter: [
   ],
 use: { 
     video: 'on',
-    baseURL: "https://the-internet.herokuapp.com/login",
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
-    headless: true,
-    viewport: { width: 1280, height: 720 },
+    baseURL: process.env.BASE_URL,
+    headless: process.env.HEADLESS === 'true',
+    viewport: null,
+    launchOptions: {
+      slowMo: Number(process.env.SLOW_MO) || 0,
+      args: ['--start-maximized'],
+    },
     actionTimeout: 10 * 1000,
     ignoreHTTPSErrors: true,
   },

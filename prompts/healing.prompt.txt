@@ -1,0 +1,10 @@
+A Playwright test failed due to broken locator.
+
+FAILED LOCATOR:
+{{failedLocator}}
+
+DOM:
+{{dom}}
+
+Generate a better, stable Playwright locator.
+Only return locator string.

@@ -1,0 +1,10 @@
+Navigate to https://www.1mg.com/labs
+
+Test Scenario:
+1. Enter for "CBC" in "Search tests or full body checkups" field
+2. Click on search button
+3. Select first item from dropdown
+4. If any popup appears on any screen, close it
+5. Validate navigation by checking:
+  - "CBC (Complete Blood Count)" text is visible
+  - "Book Now" button is visible

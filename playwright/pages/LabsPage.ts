@@ -1,48 +1,42 @@
-import { Page, Locator, expect } from '@playwright/test';
+import { Locator, Page, expect } from '@playwright/test';
+import { BasePage } from './BasePage';
 
-export class LabsPage {
-  private readonly page: Page;
-  readonly searchInput: Locator;
-  readonly resultItem: Locator;
-  readonly popupCloseButton: Locator;
-  readonly noResultsMessage: Locator;
+export class LabsPage extends BasePage {
+  private readonly searchInput: Locator;
+  private readonly searchButton: Locator;
+  private readonly dropdownResults: Locator;
+  private readonly bookNowButton: Locator;
+  private popupClose = this.page.getByRole('button', { name: 'Close' });
 
   constructor(page: Page) {
-    this.page = page;
-    this.searchInput = page.getByPlaceholder(/Search for test/i);
-    this.resultItem = page.locator('div[class*="styles__item"]');
-    this.popupCloseButton = page.locator('//div[contains(@class, "close")] | //div[@role="dialog"]//button');
-    this.noResultsMessage = page.getByText('No results found');
+    super(page);
+    this.searchInput = page.getByPlaceholder('Search tests or full body checkups');
+    this.searchButton = page.locator('img[alt*="Search Icon"]');
+    this.dropdownResults = page.locator('//*[@role="listbox"]/a');
+    this.bookNowButton = this.page.getByRole('button', { name: /BOOK/ }).first();;
   }
 
-  async navigate() {
-    await this.page.goto('https://www.1mg.com/labs');
+  async handlePopup() {
+    await super.handlePopup(this.popupClose);
   }
 
-  async closePopupIfVisible() {
-    try {
-      const isVisible = await this.popupCloseButton.first().isVisible({ timeout: 2000 });
-      if (isVisible) {
-        await this.popupCloseButton.first().click();
-      }
-    } catch (e) {
-      // Popup not found, continue test
-    }
-  }
-
-  async searchForTest(query: string) {
-    await this.searchInput.fill(query);
+  async searchForTest(testName: string) {
+    await this.fill(this.searchInput, testName);
+    await this.click(this.searchButton);
   }
 
   async selectFirstResult() {
-    await this.resultItem.first().click();
+    await this.click(this.dropdownResults.first());
+  }
+async verifyNoResults() {
+    await expect(this.dropdownResults).toHaveCount(0);
+  }
+  async verifyTestPage(expectedTitle: string) {
+    await expect(this.bookNowButton).toBeVisible({ timeout: 10000 });
+    await expect(this.page.getByText(expectedTitle).first()).toBeVisible({ timeout: 10000 });
   }
 
-  async verifyResultHeader(text: string) {
-    await expect(this.page.getByRole('heading')).toContainText(text, { ignoreCase: true });
-  }
-
-  async verifyBookNowButtonVisible() {
-    await expect(this.page.getByRole('button', { name: 'Book Now' })).toBeVisible();
+    async verifyResultsCount(count: number) {
+    await expect(this.dropdownResults).toHaveCount(count);
   }
 }

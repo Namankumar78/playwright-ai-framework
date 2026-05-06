@@ -10,14 +10,18 @@
     "grep": {},
     "grepInvert": null,
     "maxFailures": 0,
-    "metadata": {},
+    "metadata": {
+      "actualWorkers": 3
+    },
     "preserveOutput": "always",
     "projects": [
       {
         "outputDir": "D:/Repos/playwright-ai-framework/recordings",
         "repeatEach": 1,
         "retries": 0,
-        "metadata": {},
+        "metadata": {
+          "actualWorkers": 3
+        },
         "id": "chromium",
         "name": "chromium",
         "testDir": "D:/Repos/playwright-ai-framework/playwright/tests",
@@ -46,29 +50,266 @@
     "workers": 10,
     "webServer": null
   },
-  "suites": [],
-  "errors": [
+  "suites": [
     {
-      "message": "Error: Cannot find module './LabsPage'\nRequire stack:\n- D:\\Repos\\playwright-ai-framework\\playwright\\tests\\labsSearch.spec.ts\n- D:\\Repos\\playwright-ai-framework\\node_modules\\playwright\\lib\\transform\\transform.js\n- D:\\Repos\\playwright-ai-framework\\node_modules\\playwright\\lib\\common\\configLoader.js\n- D:\\Repos\\playwright-ai-framework\\node_modules\\playwright\\lib\\testActions.js\n- D:\\Repos\\playwright-ai-framework\\node_modules\\playwright\\lib\\program.js\n- D:\\Repos\\playwright-ai-framework\\node_modules\\@playwright\\test\\cli.js",
-      "stack": "Error: Cannot find module './LabsPage'\nRequire stack:\n- D:\\Repos\\playwright-ai-framework\\playwright\\tests\\labsSearch.spec.ts\n- D:\\Repos\\playwright-ai-framework\\node_modules\\playwright\\lib\\transform\\transform.js\n- D:\\Repos\\playwright-ai-framework\\node_modules\\playwright\\lib\\common\\configLoader.js\n- D:\\Repos\\playwright-ai-framework\\node_modules\\playwright\\lib\\testActions.js\n- D:\\Repos\\playwright-ai-framework\\node_modules\\playwright\\lib\\program.js\n- D:\\Repos\\playwright-ai-framework\\node_modules\\@playwright\\test\\cli.js\n    at Object.<anonymous> (D:\\Repos\\playwright-ai-framework\\playwright\\tests\\labsSearch.spec.ts:2:1)",
-      "location": {
-        "file": "D:\\Repos\\playwright-ai-framework\\playwright\\tests\\labsSearch.spec.ts",
-        "column": 1,
-        "line": 2
-      },
-      "snippet": "\u001b[90m   at \u001b[39mlabsSearch.spec.ts:2\n\n\u001b[0m \u001b[90m 1 |\u001b[39m \u001b[36mimport\u001b[39m { test } \u001b[36mfrom\u001b[39m \u001b[32m'@playwright/test'\u001b[39m\u001b[33m;\u001b[39m\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 2 |\u001b[39m \u001b[36mimport\u001b[39m { \u001b[33mLabsPage\u001b[39m } \u001b[36mfrom\u001b[39m \u001b[32m'./LabsPage'\u001b[39m\u001b[33m;\u001b[39m\n \u001b[90m   |\u001b[39m \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 3 |\u001b[39m\n \u001b[90m 4 |\u001b[39m test\u001b[33m.\u001b[39mdescribe(\u001b[32m'1mg Labs Search Functionality'\u001b[39m\u001b[33m,\u001b[39m () \u001b[33m=>\u001b[39m {\n \u001b[90m 5 |\u001b[39m   \u001b[36mlet\u001b[39m labsPage\u001b[33m:\u001b[39m \u001b[33mLabsPage\u001b[39m\u001b[33m;\u001b[39m\u001b[0m"
-    },
-    {
-      "message": "Error: No tests found",
-      "stack": "Error: No tests found"
+      "title": "labTest.spec.ts",
+      "file": "labTest.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [],
+      "suites": [
+        {
+          "title": "Labs Search Functionality",
+          "file": "labTest.spec.ts",
+          "line": 5,
+          "column": 6,
+          "specs": [
+            {
+              "title": "should navigate and verify CBC test details",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 0,
+                      "parallelIndex": 0,
+                      "status": "failed",
+                      "duration": 9692,
+                      "error": {
+                        "message": "Error: locator.waitFor: Error: strict mode violation: getByRole('textbox', { name: /search/i }) resolved to 2 elements:\n    1) <input type=\"text\" aria-label=\"\" value=\"New Delhi\" placeholder=\"Search city\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search city' })\n    2) <input value=\"\" type=\"text\" aria-label=\"\" placeholder=\"Search tests or full body checkups\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search tests or full body' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /search/i }) to be visible\u001b[22m\n",
+                        "stack": "Error: locator.waitFor: Error: strict mode violation: getByRole('textbox', { name: /search/i }) resolved to 2 elements:\n    1) <input type=\"text\" aria-label=\"\" value=\"New Delhi\" placeholder=\"Search city\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search city' })\n    2) <input value=\"\" type=\"text\" aria-label=\"\" placeholder=\"Search tests or full body checkups\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search tests or full body' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /search/i }) to be visible\u001b[22m\n\n    at LabsPage.fill (D:\\Repos\\playwright-ai-framework\\playwright\\pages\\BasePage.ts:12:19)\n    at LabsPage.searchForTest (D:\\Repos\\playwright-ai-framework\\playwright\\pages\\LabsPage.ts:19:16)\n    at D:\\Repos\\playwright-ai-framework\\playwright\\tests\\labTest.spec.ts:15:20",
+                        "location": {
+                          "file": "D:\\Repos\\playwright-ai-framework\\playwright\\pages\\BasePage.ts",
+                          "column": 19,
+                          "line": 12
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39m..\\pages\\BasePage.ts:12\n\n\u001b[0m \u001b[90m 10 |\u001b[39m\n \u001b[90m 11 |\u001b[39m   \u001b[36masync\u001b[39m fill(locator\u001b[33m:\u001b[39m \u001b[33mLocator\u001b[39m\u001b[33m,\u001b[39m value\u001b[33m:\u001b[39m string) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 12 |\u001b[39m     \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mwaitFor({ state\u001b[33m:\u001b[39m \u001b[32m'visible'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 13 |\u001b[39m     \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mfill(value)\u001b[33m;\u001b[39m\n \u001b[90m 14 |\u001b[39m   }\n \u001b[90m 15 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\Repos\\playwright-ai-framework\\playwright\\pages\\BasePage.ts",
+                            "column": 19,
+                            "line": 12
+                          },
+                          "message": "Error: locator.waitFor: Error: strict mode violation: getByRole('textbox', { name: /search/i }) resolved to 2 elements:\n    1) <input type=\"text\" aria-label=\"\" value=\"New Delhi\" placeholder=\"Search city\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search city' })\n    2) <input value=\"\" type=\"text\" aria-label=\"\" placeholder=\"Search tests or full body checkups\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search tests or full body' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /search/i }) to be visible\u001b[22m\n\n\n   at ..\\pages\\BasePage.ts:12\n\n  10 |\n  11 |   async fill(locator: Locator, value: string) {\n> 12 |     await locator.waitFor({ state: 'visible' });\n     |                   ^\n  13 |     await locator.fill(value);\n  14 |   }\n  15 |\n    at LabsPage.fill (D:\\Repos\\playwright-ai-framework\\playwright\\pages\\BasePage.ts:12:19)\n    at LabsPage.searchForTest (D:\\Repos\\playwright-ai-framework\\playwright\\pages\\LabsPage.ts:19:16)\n    at D:\\Repos\\playwright-ai-framework\\playwright\\tests\\labTest.spec.ts:15:20"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "Popup not found or already closed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-06T12:58:01.586Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\Repos\\playwright-ai-framework\\recordings\\labTest-Labs-Search-Functi-56ded-and-verify-CBC-test-details-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\Repos\\playwright-ai-framework\\recordings\\labTest-Labs-Search-Functi-56ded-and-verify-CBC-test-details-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\Repos\\playwright-ai-framework\\recordings\\labTest-Labs-Search-Functi-56ded-and-verify-CBC-test-details-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\Repos\\playwright-ai-framework\\playwright\\pages\\BasePage.ts",
+                        "column": 19,
+                        "line": 12
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "588adc3432ae50b85f41-eb091ec950816b6ade8f",
+              "file": "labTest.spec.ts",
+              "line": 14,
+              "column": 7
+            },
+            {
+              "title": "should show empty state when searching for gibberish",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 1,
+                      "parallelIndex": 1,
+                      "status": "failed",
+                      "duration": 9694,
+                      "error": {
+                        "message": "Error: locator.waitFor: Error: strict mode violation: getByRole('textbox', { name: /search/i }) resolved to 2 elements:\n    1) <input type=\"text\" aria-label=\"\" value=\"New Delhi\" placeholder=\"Search city\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search city' })\n    2) <input value=\"\" type=\"text\" aria-label=\"\" placeholder=\"Search tests or full body checkups\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search tests or full body' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /search/i }) to be visible\u001b[22m\n",
+                        "stack": "Error: locator.waitFor: Error: strict mode violation: getByRole('textbox', { name: /search/i }) resolved to 2 elements:\n    1) <input type=\"text\" aria-label=\"\" value=\"New Delhi\" placeholder=\"Search city\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search city' })\n    2) <input value=\"\" type=\"text\" aria-label=\"\" placeholder=\"Search tests or full body checkups\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search tests or full body' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /search/i }) to be visible\u001b[22m\n\n    at LabsPage.fill (D:\\Repos\\playwright-ai-framework\\playwright\\pages\\BasePage.ts:12:19)\n    at LabsPage.searchForTest (D:\\Repos\\playwright-ai-framework\\playwright\\pages\\LabsPage.ts:19:16)\n    at D:\\Repos\\playwright-ai-framework\\playwright\\tests\\labTest.spec.ts:21:20",
+                        "location": {
+                          "file": "D:\\Repos\\playwright-ai-framework\\playwright\\pages\\BasePage.ts",
+                          "column": 19,
+                          "line": 12
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39m..\\pages\\BasePage.ts:12\n\n\u001b[0m \u001b[90m 10 |\u001b[39m\n \u001b[90m 11 |\u001b[39m   \u001b[36masync\u001b[39m fill(locator\u001b[33m:\u001b[39m \u001b[33mLocator\u001b[39m\u001b[33m,\u001b[39m value\u001b[33m:\u001b[39m string) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 12 |\u001b[39m     \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mwaitFor({ state\u001b[33m:\u001b[39m \u001b[32m'visible'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 13 |\u001b[39m     \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mfill(value)\u001b[33m;\u001b[39m\n \u001b[90m 14 |\u001b[39m   }\n \u001b[90m 15 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\Repos\\playwright-ai-framework\\playwright\\pages\\BasePage.ts",
+                            "column": 19,
+                            "line": 12
+                          },
+                          "message": "Error: locator.waitFor: Error: strict mode violation: getByRole('textbox', { name: /search/i }) resolved to 2 elements:\n    1) <input type=\"text\" aria-label=\"\" value=\"New Delhi\" placeholder=\"Search city\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search city' })\n    2) <input value=\"\" type=\"text\" aria-label=\"\" placeholder=\"Search tests or full body checkups\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search tests or full body' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /search/i }) to be visible\u001b[22m\n\n\n   at ..\\pages\\BasePage.ts:12\n\n  10 |\n  11 |   async fill(locator: Locator, value: string) {\n> 12 |     await locator.waitFor({ state: 'visible' });\n     |                   ^\n  13 |     await locator.fill(value);\n  14 |   }\n  15 |\n    at LabsPage.fill (D:\\Repos\\playwright-ai-framework\\playwright\\pages\\BasePage.ts:12:19)\n    at LabsPage.searchForTest (D:\\Repos\\playwright-ai-framework\\playwright\\pages\\LabsPage.ts:19:16)\n    at D:\\Repos\\playwright-ai-framework\\playwright\\tests\\labTest.spec.ts:21:20"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "Popup not found or already closed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-06T12:58:01.590Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\Repos\\playwright-ai-framework\\recordings\\labTest-Labs-Search-Functi-ccac8-hen-searching-for-gibberish-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\Repos\\playwright-ai-framework\\recordings\\labTest-Labs-Search-Functi-ccac8-hen-searching-for-gibberish-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\Repos\\playwright-ai-framework\\recordings\\labTest-Labs-Search-Functi-ccac8-hen-searching-for-gibberish-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\Repos\\playwright-ai-framework\\playwright\\pages\\BasePage.ts",
+                        "column": 19,
+                        "line": 12
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "588adc3432ae50b85f41-376a4aacf504df30d302",
+              "file": "labTest.spec.ts",
+              "line": 20,
+              "column": 7
+            },
+            {
+              "title": "should handle empty search input",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 9738,
+                      "error": {
+                        "message": "Error: locator.waitFor: Error: strict mode violation: getByRole('textbox', { name: /search/i }) resolved to 2 elements:\n    1) <input type=\"text\" aria-label=\"\" value=\"New Delhi\" placeholder=\"Search city\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search city' })\n    2) <input value=\"\" type=\"text\" aria-label=\"\" placeholder=\"Search tests or full body checkups\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search tests or full body' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /search/i }) to be visible\u001b[22m\n",
+                        "stack": "Error: locator.waitFor: Error: strict mode violation: getByRole('textbox', { name: /search/i }) resolved to 2 elements:\n    1) <input type=\"text\" aria-label=\"\" value=\"New Delhi\" placeholder=\"Search city\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search city' })\n    2) <input value=\"\" type=\"text\" aria-label=\"\" placeholder=\"Search tests or full body checkups\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search tests or full body' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /search/i }) to be visible\u001b[22m\n\n    at LabsPage.fill (D:\\Repos\\playwright-ai-framework\\playwright\\pages\\BasePage.ts:12:19)\n    at LabsPage.searchForTest (D:\\Repos\\playwright-ai-framework\\playwright\\pages\\LabsPage.ts:19:16)\n    at D:\\Repos\\playwright-ai-framework\\playwright\\tests\\labTest.spec.ts:26:20",
+                        "location": {
+                          "file": "D:\\Repos\\playwright-ai-framework\\playwright\\pages\\BasePage.ts",
+                          "column": 19,
+                          "line": 12
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39m..\\pages\\BasePage.ts:12\n\n\u001b[0m \u001b[90m 10 |\u001b[39m\n \u001b[90m 11 |\u001b[39m   \u001b[36masync\u001b[39m fill(locator\u001b[33m:\u001b[39m \u001b[33mLocator\u001b[39m\u001b[33m,\u001b[39m value\u001b[33m:\u001b[39m string) {\n\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 12 |\u001b[39m     \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mwaitFor({ state\u001b[33m:\u001b[39m \u001b[32m'visible'\u001b[39m })\u001b[33m;\u001b[39m\n \u001b[90m    |\u001b[39m                   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\n \u001b[90m 13 |\u001b[39m     \u001b[36mawait\u001b[39m locator\u001b[33m.\u001b[39mfill(value)\u001b[33m;\u001b[39m\n \u001b[90m 14 |\u001b[39m   }\n \u001b[90m 15 |\u001b[39m\u001b[0m"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "D:\\Repos\\playwright-ai-framework\\playwright\\pages\\BasePage.ts",
+                            "column": 19,
+                            "line": 12
+                          },
+                          "message": "Error: locator.waitFor: Error: strict mode violation: getByRole('textbox', { name: /search/i }) resolved to 2 elements:\n    1) <input type=\"text\" aria-label=\"\" value=\"New Delhi\" placeholder=\"Search city\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search city' })\n    2) <input value=\"\" type=\"text\" aria-label=\"\" placeholder=\"Search tests or full body checkups\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search tests or full body' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /search/i }) to be visible\u001b[22m\n\n\n   at ..\\pages\\BasePage.ts:12\n\n  10 |\n  11 |   async fill(locator: Locator, value: string) {\n> 12 |     await locator.waitFor({ state: 'visible' });\n     |                   ^\n  13 |     await locator.fill(value);\n  14 |   }\n  15 |\n    at LabsPage.fill (D:\\Repos\\playwright-ai-framework\\playwright\\pages\\BasePage.ts:12:19)\n    at LabsPage.searchForTest (D:\\Repos\\playwright-ai-framework\\playwright\\pages\\LabsPage.ts:19:16)\n    at D:\\Repos\\playwright-ai-framework\\playwright\\tests\\labTest.spec.ts:26:20"
+                        }
+                      ],
+                      "stdout": [
+                        {
+                          "text": "Popup not found or already closed\n"
+                        }
+                      ],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-06T12:58:01.594Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "D:\\Repos\\playwright-ai-framework\\recordings\\labTest-Labs-Search-Functi-84eba-d-handle-empty-search-input-chromium\\test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "D:\\Repos\\playwright-ai-framework\\recordings\\labTest-Labs-Search-Functi-84eba-d-handle-empty-search-input-chromium\\video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "D:\\Repos\\playwright-ai-framework\\recordings\\labTest-Labs-Search-Functi-84eba-d-handle-empty-search-input-chromium\\error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "D:\\Repos\\playwright-ai-framework\\playwright\\pages\\BasePage.ts",
+                        "column": 19,
+                        "line": 12
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "588adc3432ae50b85f41-815890ee3c4060af0da5",
+              "file": "labTest.spec.ts",
+              "line": 25,
+              "column": 7
+            }
+          ]
+        }
+      ]
     }
   ],
+  "errors": [],
   "stats": {
-    "startTime": "2026-05-05T13:31:14.941Z",
-    "duration": 78.48700000000008,
+    "startTime": "2026-05-06T12:58:00.845Z",
+    "duration": 12336.984999999999,
     "expected": 0,
     "skipped": 0,
-    "unexpected": 0,
+    "unexpected": 3,
     "flaky": 0
   }
 }

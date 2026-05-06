@@ -1,25 +1,16 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { aimodel } from '../playwright.config.js';
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
+import { model } from '../playwright.config.js';
+import path from 'path';
+import fs from 'fs';
 
 export async function analyzeFailure(logs: string): Promise<string> {
-  const model = genAI.getGenerativeModel({ model: aimodel });
 
-  const prompt = `
-You are a senior QA automation expert.
+  // 📄 Read prompt file
+    const promptPath = path.resolve('prompts/analysis.prompt.txt');
+    let promptTemplate = fs.readFileSync(promptPath, 'utf-8');
+  
+    // 🔄 Inject test cases
+    const finalPrompt = promptTemplate.replace('{{logs}}', logs);
 
-Analyze the Playwright failure logs and return:
-
-1. Root Cause
-2. Fix Suggestion
-3. Confidence (High/Medium/Low)
-4. Category (Selector / Timing / API / Environment)
-
-Logs:
-${logs}
-`;
-
-  const res = await model.generateContent(prompt);
+  const res = await model.generateContent(finalPrompt);
   return res.response.text();
 }

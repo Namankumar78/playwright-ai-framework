@@ -1,23 +1,17 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { aimodel } from '../playwright.config.js';
+import { model } from '../playwright.config.js';
+import path from 'path';
+import fs from 'fs';
 
-// Initialize the API with your key
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
 
 /**
  * Generates Playwright automation tests with built-in 
  * Rate Limit (429) handling and retry logic.
  */
 export async function generateTests(userPrompt: any) {
-  // Using 3.1 Flash: Faster and has a much higher free quota than Pro
-  const model = genAI.getGenerativeModel({ model: aimodel });
 
-  const systemInstruction = `
-    You are an expert QA Automation Engineer. 
-    Generate clean, modular Playwright tests using TypeScript.
-    Use Page Object Model (POM) patterns where applicable.
-    Output ONLY the code block.
-  `;
+// 📄 Read prompt file
+  const promptPath = path.resolve('prompts/automate.prompt.txt');
+  let promptTemplate = fs.readFileSync(promptPath, 'utf-8');
 
   let retries = 3;
   let delay = 21000; // 21 seconds (Gemini's typical retry window)
@@ -26,7 +20,7 @@ export async function generateTests(userPrompt: any) {
     try {
       console.log(`[AI Generator] Attempt ${i + 1}: Generating tests...`);
       
-      const result = await model.generateContent(`${systemInstruction}\n\nTask: ${userPrompt}`);
+      const result = await model.generateContent(`${promptTemplate}\n\nTask: ${userPrompt}`);
       const response = await result.response;
       
       return response.text();

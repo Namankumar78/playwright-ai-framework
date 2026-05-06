@@ -1,20 +1,17 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { aimodel } from '../playwright.config.js';
+import { model } from '../playwright.config.js';
+import path from 'path';
+import fs from 'fs';
 
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
 
 export async function validateTests(testCases: any) {
-const model = genAI.getGenerativeModel({ model: aimodel });
 
-  const prompt = `
-  Validate and improve these test cases:
-  - Remove duplicates
-  - Add missing edge cases
-  - Improve clarity
+  // 📄 Read prompt file
+  const promptPath = path.resolve('prompts/validate.prompt.txt');
+  let promptTemplate = fs.readFileSync(promptPath, 'utf-8');
 
-  ${testCases}
-  `;
+  // 🔄 Inject test cases
+  const finalPrompt = promptTemplate.replace('{{testCases}}', testCases);
 
-  const result = await model.generateContent(prompt);
+  const result = await model.generateContent(finalPrompt);
   return result.response.text();
 }

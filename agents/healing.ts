@@ -1,24 +1,16 @@
-import { GoogleGenerativeAI } from "@google/generative-ai";
-import { aimodel } from '../playwright.config.js';
-
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY as string);
+import { model } from '../playwright.config.js';
+import path from 'path';
+import fs from 'fs';
 
 export async function healSelector(dom: any, failedLocator: any) {
-  const model = genAI.getGenerativeModel({ model: aimodel });
 
-  const prompt = `
-A Playwright test failed due to broken locator.
+  // 📄 Read prompt file
+  const promptPath = path.resolve('prompts/healing.prompt.txt');
+  let promptTemplate = fs.readFileSync(promptPath, 'utf-8');
 
-FAILED LOCATOR:
-${failedLocator}
+  // 🔄 Inject test cases
+  const finalPrompt = promptTemplate.replace('{{failedLocator}}', failedLocator).replace('{{dom}}', dom);
 
-DOM:
-${dom}
-
-Generate a better, stable Playwright locator.
-Only return locator string.
-`;
-
-  const res = await model.generateContent(prompt);
+  const res = await model.generateContent(finalPrompt);
   return res.response.text().trim();
 }
