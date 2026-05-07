@@ -10,7 +10,7 @@ import fs from 'fs';
 export async function generateTests(userPrompt: any) {
 
 // 📄 Read prompt file
-  const promptPath = path.resolve('prompts/automate.prompt.txt');
+  const promptPath = path.resolve('prompts/generate.prompt.txt');
   let promptTemplate = fs.readFileSync(promptPath, 'utf-8');
 
   let retries = 3;
