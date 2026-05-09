@@ -10,7 +10,7 @@ An AI-powered Playwright automation framework that can:
 - Merge new methods into existing pages
 - Run selective healing on failed pages only
 
----
+----
 
 # Features
 
