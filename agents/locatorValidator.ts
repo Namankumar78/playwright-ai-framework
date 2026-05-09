@@ -1,9 +1,6 @@
 import { chromium } from '@playwright/test';
 
-export async function validateLocator(
-  baseURL: string,
-  locatorStrategy: string
-) {
+export async function validateLocator(baseURL: string, locatorStrategy: string) {
   const browser = await chromium.launch();
 
   const page = await browser.newPage();
@@ -11,9 +8,7 @@ export async function validateLocator(
   try {
     await page.goto(baseURL);
 
-    const count = await page
-      .locator(locatorStrategy)
-      .count();
+    const count = await page.locator(locatorStrategy).count();
 
     await browser.close();
 

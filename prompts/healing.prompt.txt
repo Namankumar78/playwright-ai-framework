@@ -1,10 +1,90 @@
-A Playwright test failed due to broken locator.
+You are a senior Playwright automation engineer.
 
-FAILED LOCATOR:
-{{failedLocator}}
+A Playwright test failed.
 
-DOM:
-{{dom}}
+You must HEAL the EXISTING page object.
 
-Generate a better, stable Playwright locator.
-Only return locator string.
+==================================================
+CRITICAL RULES
+==================================================
+
+- Return ONLY valid TypeScript
+- Return FULL updated page code
+- DO NOT rename class
+- DO NOT rename file
+- DO NOT remove existing methods
+- DO NOT remove existing locators
+- DO NOT change method signatures
+- DO NOT regenerate whole framework
+- ONLY fix broken locators
+- ONLY improve waits if needed
+- ONLY patch failing methods
+- Preserve BasePage inheritance
+- Preserve imports
+- Preserve constructor
+- Preserve class structure
+- NEVER rename public methods unless absolutely required
+- If a method name changes, preserve backward compatibility
+- Add wrapper methods for old name
+
+==================================================
+LOCATOR RULES
+==================================================
+
+Prefer:
+- getByRole()
+- getByLabel()
+- getByTestId()
+- locator().filter({ hasText })
+
+Avoid:
+- nth-child
+- generic div selectors
+- overly broad getByText()
+
+==================================================
+FAILED FILE
+==================================================
+
+{{pageFileName}}
+
+==================================================
+PLAYWRIGHT ERROR
+==================================================
+
+{{logs}}
+
+==================================================
+AI ANALYSIS
+==================================================
+
+{{analysis}}
+
+==================================================
+DOM TIMELINE
+==================================================
+
+{{domTimeline}}
+
+==================================================
+CURRENT PAGE CODE
+==================================================
+
+{{currentPageCode}}
+
+==================================================
+IMPORTANT
+==================================================
+
+- Keep ALL existing methods
+- Keep ALL working locators
+- ONLY fix failing locator/method
+- If locator missing:
+  - use DOM timeline
+  - use accessibility attributes
+  - use visible interactive elements
+- If timing issue:
+  - add waitFor()
+  - add toBeVisible()
+  - add network stabilization
+- NEVER remove unrelated code

@@ -3,7 +3,6 @@ import { BasePage } from './BasePage';
 
 export class LabsPage extends BasePage {
   readonly searchInput: Locator;
-  readonly firstDropdownItem: Locator;
   readonly popupCloseButton: Locator;
   readonly testTitle: Locator;
   readonly bookNowButton: Locator;
@@ -11,35 +10,37 @@ export class LabsPage extends BasePage {
 
   constructor(page: Page) {
     super(page);
-    // Updated locator: Often search inputs in modern frameworks are textboxes 
-    // or identified by labels or placeholders if 'combobox' fails to resolve.
-    // We maintain the selector but ensure it's robust.
-    this.searchInput = page.getByRole('textbox', { name: /search/i });
-    this.firstDropdownItem = page.getByTestId('lab-search-item').first();
-    this.popupCloseButton = page.locator('[data-testid="close-icon"]');
-    this.testTitle = page.getByRole('heading');
-    this.bookNowButton = page.getByRole('button', { name: 'Book Now' });
-    this.noResultsMessage = page.getByText('No results found');
+    this.searchInput = page.getByPlaceholder(/Search tests/i);
+    this.popupCloseButton = page.locator('[data-testid="modal-close"], .close-btn');
+    this.testTitle = page.getByRole('heading', { level: 1 });
+    this.bookNowButton = page.getByRole('button', { name: /Book Now/i });
+    // Updated locator to be more robust, looking for heading or text container
+    this.noResultsMessage = page.locator('text=/No results found/i');
   }
 
-  /**
-   * Refined searchTest to ensure input is ready for interaction.
-   * Playwright's fill() includes auto-waiting, but if the component is lazy-loaded,
-   * we ensure the element is actionable before interaction.
-   */
-  async searchTest(testName: string) {
-    await this.searchInput.waitFor({ state: 'attached' });
-    await this.fill(this.searchInput, testName);
+  async navigate() {
+    await this.page.goto('https://www.1mg.com/labs');
     await this.handlePopup(this.popupCloseButton);
-    await this.click(this.firstDropdownItem);
   }
 
-  // Backward compatibility wrapper if needed, preserving class structure
   async searchForTest(testName: string) {
-    await this.searchTest(testName);
+    // Ensure input is cleared and search is triggered
+    await this.searchInput.fill(testName);
+    await this.page.keyboard.press('Enter');
+    
+    // Using a more flexible filter with case insensitivity and awaiting network idle
+    // to ensure the search results have been fetched and rendered
+    await this.page.waitForLoadState('networkidle');
+    
+    const result = this.page.locator('[data-testid="search-result"]').filter({ hasText: testName }).first();
+    
+    // Wait for the result to be both attached and visible
+    await expect(result).toBeVisible({ timeout: 15000 });
+    await this.click(result);
   }
 
-  async verifySearch(testName: string) {
-    await expect(this.page).toHaveURL(new RegExp(testName.toLowerCase()));
+  // Backward compatibility wrapper for searchForTest if needed by other tests
+  async search(testName: string) {
+    await this.searchForTest(testName);
   }
 }

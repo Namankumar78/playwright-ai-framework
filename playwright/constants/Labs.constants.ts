@@ -1,4 +1,4 @@
-export const LABS_CONSTANTS = {
-  VALID_TEST: 'CBC',
-  INVALID_TEST: 'NonExistentTest123XYZ'
+export const LABS_DATA = {
+  validTest: 'CBC',
+  invalidTest: 'xyz123nonexistent'
 };

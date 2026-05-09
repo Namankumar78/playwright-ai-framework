@@ -8,25 +8,24 @@ export class BasePage {
   }
 
   async click(locator: Locator) {
-    await locator.waitFor({ state: 'visible' });
     await locator.click();
   }
 
   async fill(locator: Locator, value: string) {
-    await locator.waitFor({ state: 'visible' });
     await locator.fill(value);
   }
 
   async waitForElement(locator: Locator) {
-    await expect(locator).toBeVisible();
+    await locator.waitFor({ state: 'visible' });
   }
 
   async handlePopup(locator: Locator) {
     try {
-      const isVisible = await locator.first().isVisible({ timeout: 2000 });
-      if (isVisible) await locator.first().click();
-    } catch (error) {
-      // Popup not present, proceed
+      if (await locator.isVisible({ timeout: 5000 })) {
+        await locator.click();
+      }
+    } catch (e) {
+      // Popup not found, continue execution
     }
   }
 }

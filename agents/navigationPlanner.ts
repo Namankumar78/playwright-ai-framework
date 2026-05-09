@@ -1,8 +1,6 @@
 import { model } from '../playwright.config.js';
 
-export async function generateNavigationPlan(
-  manualTest: string
-) {
+export async function generateNavigationPlan(manualTest: string) {
   const prompt = `
 Convert this manual test into a browser navigation plan.
 

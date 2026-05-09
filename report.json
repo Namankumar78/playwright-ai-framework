@@ -1,4 +1,4 @@
-◇ injected env (0) from .env // tip: ⌘ override existing { override: true }
+◇ injected env (0) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
 {
   "config": {
     "configFile": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright.config.ts",
@@ -12,7 +12,7 @@
     "grepInvert": null,
     "maxFailures": 0,
     "metadata": {
-      "actualWorkers": 2
+      "actualWorkers": 3
     },
     "preserveOutput": "always",
     "projects": [
@@ -21,7 +21,7 @@
         "repeatEach": 1,
         "retries": 0,
         "metadata": {
-          "actualWorkers": 2
+          "actualWorkers": 3
         },
         "id": "chromium",
         "name": "chromium",
@@ -53,20 +53,20 @@
   },
   "suites": [
     {
-      "title": "labsSearch.spec.ts",
-      "file": "labsSearch.spec.ts",
+      "title": "labs.spec.ts",
+      "file": "labs.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "Labs Search Suite",
-          "file": "labsSearch.spec.ts",
+          "title": "1mg Labs Functionality",
+          "file": "labs.spec.ts",
           "line": 5,
           "column": 6,
           "specs": [
             {
-              "title": "Should perform valid search successfully",
+              "title": "should successfully search and view CBC test details",
               "ok": false,
               "tags": [],
               "tests": [
@@ -81,76 +81,66 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 2575,
+                      "duration": 23283,
                       "error": {
-                        "message": "Error: locator.waitFor: Error: strict mode violation: getByRole('textbox', { name: /search/i }) resolved to 2 elements:\n    1) <input type=\"text\" aria-label=\"\" value=\"New Delhi\" placeholder=\"Search city\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search city' })\n    2) <input value=\"\" type=\"text\" aria-label=\"\" placeholder=\"Search tests or full body checkups\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search tests or full body' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /search/i })\u001b[22m\n",
-                        "stack": "Error: locator.waitFor: Error: strict mode violation: getByRole('textbox', { name: /search/i }) resolved to 2 elements:\n    1) <input type=\"text\" aria-label=\"\" value=\"New Delhi\" placeholder=\"Search city\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search city' })\n    2) <input value=\"\" type=\"text\" aria-label=\"\" placeholder=\"Search tests or full body checkups\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search tests or full body' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /search/i })\u001b[22m\n\n    at LabsPage.searchTest (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts:31:28)\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labsSearch.spec.ts:12:20",
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\u001b[22m\n\n    at LabsPage.searchForTest (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts:38:26)\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labs.spec.ts:14:5",
                         "location": {
                           "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts",
-                          "column": 28,
-                          "line": 31
+                          "column": 26,
+                          "line": 38
                         },
-                        "snippet": "\u001b[90m   at \u001b[39m../pages/LabsPage.ts:31\n\n  29 |    */\n  30 |   async searchTest(testName: string) {\n> 31 |     await this.searchInput.waitFor({ state: 'attached' });\n     |                            ^\n  32 |     await this.fill(this.searchInput, testName);\n  33 |     await this.handlePopup(this.popupCloseButton);\n  34 |     await this.click(this.firstDropdownItem);"
+                        "snippet": "\u001b[90m   at \u001b[39m../pages/LabsPage.ts:38\n\n  36 |     \n  37 |     // Wait for the result to be both attached and visible\n> 38 |     await expect(result).toBeVisible({ timeout: 15000 });\n     |                          ^\n  39 |     await this.click(result);\n  40 |   }\n  41 |"
                       },
                       "errors": [
                         {
                           "location": {
                             "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts",
-                            "column": 28,
-                            "line": 31
+                            "column": 26,
+                            "line": 38
                           },
-                          "message": "Error: locator.waitFor: Error: strict mode violation: getByRole('textbox', { name: /search/i }) resolved to 2 elements:\n    1) <input type=\"text\" aria-label=\"\" value=\"New Delhi\" placeholder=\"Search city\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search city' })\n    2) <input value=\"\" type=\"text\" aria-label=\"\" placeholder=\"Search tests or full body checkups\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search tests or full body' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /search/i })\u001b[22m\n\n\n   at ../pages/LabsPage.ts:31\n\n  29 |    */\n  30 |   async searchTest(testName: string) {\n> 31 |     await this.searchInput.waitFor({ state: 'attached' });\n     |                            ^\n  32 |     await this.fill(this.searchInput, testName);\n  33 |     await this.handlePopup(this.popupCloseButton);\n  34 |     await this.click(this.firstDropdownItem);\n    at LabsPage.searchTest (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts:31:28)\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labsSearch.spec.ts:12:20"
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\u001b[22m\n\n\n   at ../pages/LabsPage.ts:38\n\n  36 |     \n  37 |     // Wait for the result to be both attached and visible\n> 38 |     await expect(result).toBeVisible({ timeout: 15000 });\n     |                          ^\n  39 |     await this.click(result);\n  40 |   }\n  41 |\n    at LabsPage.searchForTest (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts:38:26)\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labs.spec.ts:14:5"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-05-09T10:54:40.816Z",
+                      "startTime": "2026-05-09T19:05:35.468Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labsSearch-Labs-Search-Sui-03960-m-valid-search-successfully-chromium/test-failed-1.png"
+                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labs-1mg-Labs-Functionalit-2cd3d-h-and-view-CBC-test-details-chromium/test-failed-1.png"
                         },
                         {
                           "name": "video",
                           "contentType": "video/webm",
-                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labsSearch-Labs-Search-Sui-03960-m-valid-search-successfully-chromium/video-1.webm"
-                        },
-                        {
-                          "name": "video",
-                          "contentType": "video/webm",
-                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labsSearch-Labs-Search-Sui-03960-m-valid-search-successfully-chromium/video.webm"
-                        },
-                        {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labsSearch-Labs-Search-Sui-03960-m-valid-search-successfully-chromium/test-failed-2.png"
+                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labs-1mg-Labs-Functionalit-2cd3d-h-and-view-CBC-test-details-chromium/video.webm"
                         },
                         {
                           "name": "error-context",
                           "contentType": "text/markdown",
-                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labsSearch-Labs-Search-Sui-03960-m-valid-search-successfully-chromium/error-context.md"
+                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labs-1mg-Labs-Functionalit-2cd3d-h-and-view-CBC-test-details-chromium/error-context.md"
                         }
                       ],
                       "errorLocation": {
                         "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts",
-                        "column": 28,
-                        "line": 31
+                        "column": 26,
+                        "line": 38
                       }
                     }
                   ],
                   "status": "unexpected"
                 }
               ],
-              "id": "675c6e5e847e7d45d6fa-33dd276851f0a8eb8236",
-              "file": "labsSearch.spec.ts",
-              "line": 10,
+              "id": "b2dde59737ce39e0b8e6-fc6ad5b50b70467842b2",
+              "file": "labs.spec.ts",
+              "line": 13,
               "column": 7
             },
             {
-              "title": "Should show no results for invalid search",
+              "title": "should show no results for an invalid search term",
               "ok": false,
               "tags": [],
               "tests": [
@@ -165,62 +155,136 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "failed",
-                      "duration": 1986,
+                      "duration": 6606,
                       "error": {
-                        "message": "Error: locator.waitFor: Error: strict mode violation: getByRole('textbox', { name: /search/i }) resolved to 2 elements:\n    1) <input type=\"text\" aria-label=\"\" value=\"New Delhi\" placeholder=\"Search city\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search city' })\n    2) <input value=\"\" type=\"text\" aria-label=\"\" placeholder=\"Search tests or full body checkups\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search tests or full body' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /search/i }) to be visible\u001b[22m\n",
-                        "stack": "Error: locator.waitFor: Error: strict mode violation: getByRole('textbox', { name: /search/i }) resolved to 2 elements:\n    1) <input type=\"text\" aria-label=\"\" value=\"New Delhi\" placeholder=\"Search city\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search city' })\n    2) <input value=\"\" type=\"text\" aria-label=\"\" placeholder=\"Search tests or full body checkups\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search tests or full body' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /search/i }) to be visible\u001b[22m\n\n    at LabsPage.fill (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/BasePage.ts:16:19)\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labsSearch.spec.ts:19:20",
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('text=/No results found/i')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=/No results found/i')\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('text=/No results found/i')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=/No results found/i')\u001b[22m\n\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labs.spec.ts:21:45",
                         "location": {
-                          "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/BasePage.ts",
-                          "column": 19,
-                          "line": 16
+                          "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labs.spec.ts",
+                          "column": 45,
+                          "line": 21
                         },
-                        "snippet": "\u001b[90m   at \u001b[39m../pages/BasePage.ts:16\n\n  14 |\n  15 |   async fill(locator: Locator, value: string) {\n> 16 |     await locator.waitFor({ state: 'visible' });\n     |                   ^\n  17 |     await locator.fill(value);\n  18 |   }\n  19 |"
+                        "snippet": "  19 |   test('should show no results for an invalid search term', async () => {\n  20 |     await labsPage.fill(labsPage.searchInput, LABS_DATA.invalidTest);\n> 21 |     await expect(labsPage.noResultsMessage).toBeVisible();\n     |                                             ^\n  22 |   });\n  23 |\n  24 |   test('should trigger booking flow when clicking Book Now', async ({ page }) => {"
                       },
                       "errors": [
                         {
                           "location": {
-                            "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/BasePage.ts",
-                            "column": 19,
-                            "line": 16
+                            "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labs.spec.ts",
+                            "column": 45,
+                            "line": 21
                           },
-                          "message": "Error: locator.waitFor: Error: strict mode violation: getByRole('textbox', { name: /search/i }) resolved to 2 elements:\n    1) <input type=\"text\" aria-label=\"\" value=\"New Delhi\" placeholder=\"Search city\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search city' })\n    2) <input value=\"\" type=\"text\" aria-label=\"\" placeholder=\"Search tests or full body checkups\" class=\"SearchField__inputBox__bT_wr textPrimary bodyLargeMedium\"/> aka getByRole('textbox', { name: 'Search tests or full body' })\n\nCall log:\n\u001b[2m  - waiting for getByRole('textbox', { name: /search/i }) to be visible\u001b[22m\n\n\n   at ../pages/BasePage.ts:16\n\n  14 |\n  15 |   async fill(locator: Locator, value: string) {\n> 16 |     await locator.waitFor({ state: 'visible' });\n     |                   ^\n  17 |     await locator.fill(value);\n  18 |   }\n  19 |\n    at LabsPage.fill (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/BasePage.ts:16:19)\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labsSearch.spec.ts:19:20"
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('text=/No results found/i')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=/No results found/i')\u001b[22m\n\n\n  19 |   test('should show no results for an invalid search term', async () => {\n  20 |     await labsPage.fill(labsPage.searchInput, LABS_DATA.invalidTest);\n> 21 |     await expect(labsPage.noResultsMessage).toBeVisible();\n     |                                             ^\n  22 |   });\n  23 |\n  24 |   test('should trigger booking flow when clicking Book Now', async ({ page }) => {\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labs.spec.ts:21:45"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-05-09T10:54:40.816Z",
+                      "startTime": "2026-05-09T19:05:35.470Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labsSearch-Labs-Search-Sui-69364--results-for-invalid-search-chromium/test-failed-1.png"
+                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labs-1mg-Labs-Functionalit-1364c--for-an-invalid-search-term-chromium/test-failed-1.png"
                         },
                         {
                           "name": "video",
                           "contentType": "video/webm",
-                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labsSearch-Labs-Search-Sui-69364--results-for-invalid-search-chromium/video.webm"
+                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labs-1mg-Labs-Functionalit-1364c--for-an-invalid-search-term-chromium/video.webm"
                         },
                         {
                           "name": "error-context",
                           "contentType": "text/markdown",
-                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labsSearch-Labs-Search-Sui-69364--results-for-invalid-search-chromium/error-context.md"
+                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labs-1mg-Labs-Functionalit-1364c--for-an-invalid-search-term-chromium/error-context.md"
                         }
                       ],
                       "errorLocation": {
-                        "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/BasePage.ts",
-                        "column": 19,
-                        "line": 16
+                        "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labs.spec.ts",
+                        "column": 45,
+                        "line": 21
                       }
                     }
                   ],
                   "status": "unexpected"
                 }
               ],
-              "id": "675c6e5e847e7d45d6fa-e8667d8e098845f48415",
-              "file": "labsSearch.spec.ts",
-              "line": 17,
+              "id": "b2dde59737ce39e0b8e6-44091517046f6c2c0481",
+              "file": "labs.spec.ts",
+              "line": 19,
+              "column": 7
+            },
+            {
+              "title": "should trigger booking flow when clicking Book Now",
+              "ok": false,
+              "tags": [],
+              "tests": [
+                {
+                  "timeout": 30000,
+                  "annotations": [],
+                  "expectedStatus": "passed",
+                  "projectId": "chromium",
+                  "projectName": "chromium",
+                  "results": [
+                    {
+                      "workerIndex": 2,
+                      "parallelIndex": 2,
+                      "status": "failed",
+                      "duration": 22589,
+                      "error": {
+                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\u001b[22m\n",
+                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\u001b[22m\n\n    at LabsPage.searchForTest (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts:38:26)\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labs.spec.ts:25:5",
+                        "location": {
+                          "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts",
+                          "column": 26,
+                          "line": 38
+                        },
+                        "snippet": "\u001b[90m   at \u001b[39m../pages/LabsPage.ts:38\n\n  36 |     \n  37 |     // Wait for the result to be both attached and visible\n> 38 |     await expect(result).toBeVisible({ timeout: 15000 });\n     |                          ^\n  39 |     await this.click(result);\n  40 |   }\n  41 |"
+                      },
+                      "errors": [
+                        {
+                          "location": {
+                            "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts",
+                            "column": 26,
+                            "line": 38
+                          },
+                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\u001b[22m\n\n\n   at ../pages/LabsPage.ts:38\n\n  36 |     \n  37 |     // Wait for the result to be both attached and visible\n> 38 |     await expect(result).toBeVisible({ timeout: 15000 });\n     |                          ^\n  39 |     await this.click(result);\n  40 |   }\n  41 |\n    at LabsPage.searchForTest (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts:38:26)\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labs.spec.ts:25:5"
+                        }
+                      ],
+                      "stdout": [],
+                      "stderr": [],
+                      "retry": 0,
+                      "startTime": "2026-05-09T19:05:35.471Z",
+                      "annotations": [],
+                      "attachments": [
+                        {
+                          "name": "screenshot",
+                          "contentType": "image/png",
+                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labs-1mg-Labs-Functionalit-ae237-flow-when-clicking-Book-Now-chromium/test-failed-1.png"
+                        },
+                        {
+                          "name": "video",
+                          "contentType": "video/webm",
+                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labs-1mg-Labs-Functionalit-ae237-flow-when-clicking-Book-Now-chromium/video.webm"
+                        },
+                        {
+                          "name": "error-context",
+                          "contentType": "text/markdown",
+                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labs-1mg-Labs-Functionalit-ae237-flow-when-clicking-Book-Now-chromium/error-context.md"
+                        }
+                      ],
+                      "errorLocation": {
+                        "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts",
+                        "column": 26,
+                        "line": 38
+                      }
+                    }
+                  ],
+                  "status": "unexpected"
+                }
+              ],
+              "id": "b2dde59737ce39e0b8e6-b06125de26fc49283dbc",
+              "file": "labs.spec.ts",
+              "line": 24,
               "column": 7
             }
           ]
@@ -230,11 +294,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-05-09T10:54:40.564Z",
-    "duration": 3166.571,
+    "startTime": "2026-05-09T19:05:35.233Z",
+    "duration": 23836.049000000003,
     "expected": 0,
     "skipped": 0,
-    "unexpected": 2,
+    "unexpected": 3,
     "flaky": 0
   }
 }
