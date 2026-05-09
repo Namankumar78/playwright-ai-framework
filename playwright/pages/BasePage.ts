@@ -8,10 +8,12 @@ export class BasePage {
   }
 
   async click(locator: Locator) {
+    await locator.waitFor({ state: 'visible' });
     await locator.click();
   }
 
   async fill(locator: Locator, value: string) {
+    await locator.waitFor({ state: 'visible' });
     await locator.fill(value);
   }
 
@@ -21,9 +23,10 @@ export class BasePage {
 
   async handlePopup(locator: Locator) {
     try {
-      await locator.click({ timeout: 3000 });
-    } catch (e) {
-      // Popup not found, ignore
+      const isVisible = await locator.first().isVisible({ timeout: 2000 });
+      if (isVisible) await locator.first().click();
+    } catch (error) {
+      // Popup not present, proceed
     }
   }
 }
