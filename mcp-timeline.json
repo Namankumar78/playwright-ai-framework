@@ -1,0 +1,14 @@
+[
+  {
+    "timestamp": "2026-05-09T09:35:23.038Z",
+    "reason": "Initial Load",
+    "url": "about:blank",
+    "dom": []
+  },
+  {
+    "timestamp": "2026-05-09T09:35:24.732Z",
+    "reason": "Navigation: /",
+    "url": "https://www.1mg.com/",
+    "dom": []
+  }
+]

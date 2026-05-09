@@ -1,5 +1,5 @@
-export const constant = { 
-    searchText: 'CBC',
-    invalidtestname: 'invalidtestname',
-    CBCTestName: 'CBC (Complete Blood Count)'
- };
+export const LABS_CONSTANTS = {
+  VALID_TEST: 'CBC',
+  INVALID_TEST: 'XYZ123ABC_INVALID',
+  PARTIAL_TEST: 'Thyroid'
+};

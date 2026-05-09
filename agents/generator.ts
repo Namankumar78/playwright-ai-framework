@@ -13,7 +13,7 @@ export async function generateTests(userPrompt: any) {
   const promptPath = path.resolve('prompts/generate.prompt.txt');
   let promptTemplate = fs.readFileSync(promptPath, 'utf-8');
 
-  let retries = 3;
+  let retries = 1;
   let delay = 21000; // 21 seconds (Gemini's typical retry window)
 
   for (let i = 0; i < retries; i++) {

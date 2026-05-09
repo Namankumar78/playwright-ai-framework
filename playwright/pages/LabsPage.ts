@@ -1,42 +1,49 @@
-import { Locator, Page, expect } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 import { BasePage } from './BasePage';
 
 export class LabsPage extends BasePage {
-  private readonly searchInput: Locator;
-  private readonly searchButton: Locator;
-  private readonly dropdownResults: Locator;
-  private readonly bookNowButton: Locator;
-  private popupClose = this.page.getByRole('button', { name: 'Close' });
+  // Refined locator to target the specific search input commonly used on 1mg Labs pages
+  // Using a more robust selector strategy that targets the input field directly
+  readonly searchInput: Locator = this.page.getByRole('textbox', { name: /Search for test or package/i })
+    .or(this.page.locator('input[type="text"][placeholder*="Search"]'));
+    
+  readonly firstSearchResult: Locator = this.page.getByRole('listitem').filter({ hasText: /Result/i }).first();
+  readonly closeButton: Locator = this.page.locator('button[aria-label="Close"], .icon-close').first();
+  readonly noResultsMessage: Locator = this.page.getByText('No results found', { exact: false });
 
   constructor(page: Page) {
     super(page);
-    this.searchInput = page.getByPlaceholder('Search tests or full body checkups');
-    this.searchButton = page.locator('img[alt*="Search Icon"]');
-    this.dropdownResults = page.locator('//*[@role="listbox"]/a');
-    this.bookNowButton = this.page.getByRole('button', { name: /BOOK/ }).first();;
   }
 
-  async handlePopup() {
-    await super.handlePopup(this.popupClose);
+  async navigate() {
+    await this.page.goto('https://www.1mg.com/labs');
   }
 
-  async searchForTest(testName: string) {
-    await this.fill(this.searchInput, testName);
-    await this.click(this.searchButton);
+  async handlePopups() {
+    await this.handlePopup(this.closeButton);
   }
 
-  async selectFirstResult() {
-    await this.click(this.dropdownResults.first());
-  }
-async verifyNoResults() {
-    await expect(this.dropdownResults).toHaveCount(0);
-  }
-  async verifyTestPage(expectedTitle: string) {
-    await expect(this.bookNowButton).toBeVisible({ timeout: 10000 });
-    await expect(this.page.getByText(expectedTitle).first()).toBeVisible({ timeout: 10000 });
+  async searchTest(testName: string) {
+    // Playwright's fill() includes built-in actionability checks (visible, enabled, etc).
+    // The previous explicit waitFor was likely failing due to an overly restrictive 
+    // combobox role or locator mismatch. Using locator().fill() is best practice.
+    await this.searchInput.fill(testName);
+    
+    // Removed the explicit waitFor as it was causing timeouts and is redundant.
+    // If the search triggers a navigation or specific loading state, 
+    // it should be handled in the test flow via verifySearchResultVisible.
   }
 
-    async verifyResultsCount(count: number) {
-    await expect(this.dropdownResults).toHaveCount(count);
+  async verifySearchResultVisible() {
+    // Increased timeout to account for async search/debouncing behavior
+    await expect(this.firstSearchResult).toBeVisible({ timeout: 10000 });
+  }
+
+  /**
+   * Backward compatibility for potential usage in other tests
+   * @deprecated use verifySearchResultVisible()
+   */
+  async waitForElement(locator: Locator) {
+    await expect(locator).toBeVisible({ timeout: 10000 });
   }
 }

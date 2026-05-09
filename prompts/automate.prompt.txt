@@ -46,30 +46,87 @@ ARCHITECTURE RULES
 * Use Playwright test syntax
 
 ========================
-SELECTOR RULES (STRICT)
-=======================
+LOCATOR RULES (MANDATORY)
+========================
 
-* Prefer:
+- Every locator MUST resolve to exactly ONE element
+- If multiple matching elements exist:
+  - scope within parent container
+  - use filter({ hasText })
+  - use exact text
 
-  * getByRole()
-  * getByText()
-  * getByLabel()
+Preferred order:
+1. getByTestId
+2. getByRole
+3. getByLabel
+4. locator().filter({ hasText })
 
-* Avoid:
+Avoid:
+- locator('div')
+- broad getByText()
+- generic role selectors
+- nth-child
 
-  * generic selectors (div, span, *)
-  * dynamic IDs
-  * nth-child
+BAD:
+page.getByRole('button', { name: 'BOOK' })
 
-* If multiple elements match:
+GOOD:
+page
+  .locator('[data-testid="package-card"]')
+  .filter({ hasText: 'CBC (Complete Blood Count)' })
+  .getByRole('button', { name: 'BOOK' })
 
-  * scope using parent container
-  * OR use .filter({ hasText })
-  * OR use .first() as fallback
+========================
+LOCATOR RELIABILITY RULES (MANDATORY)
+========================
 
-* EVERY locator MUST resolve to EXACTLY ONE element
+- EVERY locator MUST resolve to EXACTLY ONE element
 
-* If locator is not unique, output is INVALID
+Priority Order:
+1. getByRole()
+2. getByLabel()
+3. getByTestId()
+4. locator().filter({ hasText })
+
+Preferred Patterns:
+- page.getByRole('button', { name: 'Search' })
+- page.getByLabel('Username')
+- locator('[data-testid="search-result"]')
+
+Avoid:
+- locator('div')
+- locator('span')
+- nth-child
+- generic getByText()
+- generic button selectors
+
+If multiple elements match:
+- scope locator within parent container
+- OR use .filter({ hasText })
+- OR use exact: true
+- OR use .first() ONLY as last fallback
+
+Examples:
+
+BAD:
+page.getByRole('button', { name: /BOOK/ })
+
+GOOD:
+page
+  .locator('[data-testid="search-result"]')
+  .getByRole('button', { name: 'BOOK' })
+
+BAD:
+page.getByText('CBC')
+
+GOOD:
+page.getByRole('heading', {
+  name: 'CBC (Complete Blood Count)',
+  exact: true
+})
+
+- NEVER generate locators that match multiple elements
+- If locator uniqueness is uncertain, generate scoped locator
 
 ========================
 EXECUTION RULES
@@ -134,6 +191,13 @@ Rules:
 * DO NOT generate incorrect relative paths
 
 * If import paths are wrong, output is INVALID 
+
+IMPORTANT:
+- Return RAW TypeScript ONLY
+- DO NOT use markdown
+- DO NOT wrap code in ```typescript
+- DO NOT add explanations
+- Output must start directly with import/export/class
 
 
 ========================

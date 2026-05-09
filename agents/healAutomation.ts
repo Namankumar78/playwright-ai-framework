@@ -1,0 +1,108 @@
+import { model } from '../playwright.config.js';
+
+export async function healAutomation(
+  logs: string,
+  analysis: string,
+  domTimeline: any[],
+  currentPageCode: string,
+  pageFileName: string
+) {
+
+  const prompt = `
+You are a senior Playwright automation engineer.
+
+A Playwright test failed.
+
+You must HEAL the EXISTING page object.
+
+==================================================
+CRITICAL RULES
+==================================================
+
+- Return ONLY valid TypeScript
+- Return FULL updated page code
+- DO NOT rename class
+- DO NOT rename file
+- DO NOT remove existing methods
+- DO NOT remove existing locators
+- DO NOT change method signatures
+- DO NOT regenerate whole framework
+- ONLY fix broken locators
+- ONLY improve waits if needed
+- ONLY patch failing methods
+- Preserve BasePage inheritance
+- Preserve imports
+- Preserve constructor
+- Preserve class structure
+- NEVER rename public methods unless absolutely required
+- If a method name changes, preserve backward compatibility
+- Add wrapper methods for old name
+
+==================================================
+LOCATOR RULES
+==================================================
+
+Prefer:
+- getByRole()
+- getByLabel()
+- getByTestId()
+- locator().filter({ hasText })
+
+Avoid:
+- nth-child
+- generic div selectors
+- overly broad getByText()
+
+==================================================
+FAILED FILE
+==================================================
+
+${pageFileName}
+
+==================================================
+PLAYWRIGHT ERROR
+==================================================
+
+${logs}
+
+==================================================
+AI ANALYSIS
+==================================================
+
+${analysis}
+
+==================================================
+DOM TIMELINE
+==================================================
+
+${JSON.stringify(domTimeline, null, 2)}
+
+==================================================
+CURRENT PAGE CODE
+==================================================
+
+${currentPageCode}
+
+==================================================
+IMPORTANT
+==================================================
+
+- Keep ALL existing methods
+- Keep ALL working locators
+- ONLY fix failing locator/method
+- If locator missing:
+  - use DOM timeline
+  - use accessibility attributes
+  - use visible interactive elements
+- If timing issue:
+  - add waitFor()
+  - add toBeVisible()
+  - add network stabilization
+- NEVER remove unrelated code
+`;
+
+  const result =
+    await model.generateContent(prompt);
+
+  return result.response.text();
+}

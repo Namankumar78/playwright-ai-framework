@@ -21,7 +21,7 @@ reporter: [
     ['html'],
     ['list'],
     ['allure-playwright'],
-    ['json', { outputFile: 'test-results.json' }]
+    ['json', { outputFile: 'report.json' }]
   ],
 use: { 
     video: 'on',
