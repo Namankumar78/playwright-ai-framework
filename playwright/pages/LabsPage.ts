@@ -27,13 +27,16 @@ export class LabsPage extends BasePage {
     // Ensure input is cleared and search is triggered
     await this.searchInput.fill(testName);
     await this.page.keyboard.press('Enter');
-    
+
     // Using a more flexible filter with case insensitivity and awaiting network idle
     // to ensure the search results have been fetched and rendered
     await this.page.waitForLoadState('networkidle');
-    
-    const result = this.page.locator('[data-testid="search-result"]').filter({ hasText: testName }).first();
-    
+
+    const result = this.page
+      .locator('[data-testid="search-result"]')
+      .filter({ hasText: testName })
+      .first();
+
     // Wait for the result to be both attached and visible
     await expect(result).toBeVisible({ timeout: 15000 });
     await this.click(result);

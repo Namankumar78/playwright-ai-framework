@@ -327,8 +327,8 @@ async function generateWithValidation(input: string, max = 3) {
 
           p.code = p.code.replace(/export class (\w+)/, 'export class $1 extends BasePage');
 
-          if (!p.code.includes('from \'./BasePage\'')) {
-            p.code = 'import { BasePage } from \'./BasePage\';\n\n' + p.code;
+          if (!p.code.includes("from './BasePage'")) {
+            p.code = "import { BasePage } from './BasePage';\n\n" + p.code;
           }
         }
 
@@ -438,64 +438,64 @@ async function buildDOMTimeline(navigationPlan: any) {
         console.log(`🚀 Executing Step: ${JSON.stringify(step)}`);
 
         switch (step.action) {
-        case 'fill': {
-          const locator = page.locator(step.selector || 'input').first();
+          case 'fill': {
+            const locator = page.locator(step.selector || 'input').first();
 
-          await locator.waitFor({
-            state: 'visible',
-            timeout: 10000,
-          });
-
-          await locator.fill(step.value || '');
-
-          break;
-        }
-
-        case 'press': {
-          await page.keyboard.press(step.key || 'Enter');
-
-          break;
-        }
-
-        case 'click': {
-          let locator;
-
-          if (step.role && step.name) {
-            locator = page.getByRole(step.role, {
-              name: step.name,
+            await locator.waitFor({
+              state: 'visible',
+              timeout: 10000,
             });
-          } else if (step.text) {
-            locator = page.getByText(step.text);
-          } else if (step.selector) {
-            locator = page.locator(step.selector);
+
+            await locator.fill(step.value || '');
+
+            break;
           }
 
-          if (!locator) {
-            continue;
+          case 'press': {
+            await page.keyboard.press(step.key || 'Enter');
+
+            break;
           }
 
-          const first = locator.first();
+          case 'click': {
+            let locator;
 
-          await first.waitFor({
-            state: 'visible',
-            timeout: 10000,
-          });
+            if (step.role && step.name) {
+              locator = page.getByRole(step.role, {
+                name: step.name,
+              });
+            } else if (step.text) {
+              locator = page.getByText(step.text);
+            } else if (step.selector) {
+              locator = page.locator(step.selector);
+            }
 
-          await first.click();
+            if (!locator) {
+              continue;
+            }
 
-          break;
-        }
+            const first = locator.first();
 
-        case 'navigate': {
-          const url = `${baseURL}${step.url}`;
+            await first.waitFor({
+              state: 'visible',
+              timeout: 10000,
+            });
 
-          await page.goto(url, {
-            waitUntil: 'domcontentloaded',
-            timeout: 30000,
-          });
+            await first.click();
 
-          break;
-        }
+            break;
+          }
+
+          case 'navigate': {
+            const url = `${baseURL}${step.url}`;
+
+            await page.goto(url, {
+              waitUntil: 'domcontentloaded',
+              timeout: 30000,
+            });
+
+            break;
+          }
         }
 
         await page.waitForTimeout(2000);

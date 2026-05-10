@@ -1,4 +1,5 @@
 import { model } from '../playwright.config.js';
+//import { fetchJiraTicket } from './jiraFetcher.js';
 import path from 'path';
 import fs from 'fs';
 
@@ -10,6 +11,20 @@ export async function generateTests(userPrompt: any) {
   // 📄 Read prompt file
   const promptPath = path.resolve('prompts/generate.prompt.txt');
   const promptTemplate = fs.readFileSync(promptPath, 'utf-8');
+
+
+//// Featching Jira ticket details (if needed for the prompt)
+// const jiraId = 'PROJ-123'; // Example Jira ID, replace with dynamic value as needed
+//  const jiraTicket = await fetchJiraTicket(jiraId);
+
+//   const promptPath = path.resolve('prompts/jiraTest.prompt.txt');
+//   const promptTemplate = fs.readFileSync(promptPath, 'utf-8');
+
+//   const finalPrompt = promptTemplate.replace(
+//     '{{jiraTicket}}',
+//     JSON.stringify(jiraTicket, null, 2)
+//   );
+
 
   const retries = 1;
   const delay = 21000; // 21 seconds (Gemini's typical retry window)

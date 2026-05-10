@@ -1,4 +1,4 @@
-◇ injected env (0) from .env // tip: ⌘ multiple files { path: ['.env.local', '.env'] }
+◇ injected env (0) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
 {
   "config": {
     "configFile": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright.config.ts",
@@ -53,20 +53,20 @@
   },
   "suites": [
     {
-      "title": "labs.spec.ts",
-      "file": "labs.spec.ts",
+      "title": "github.spec.ts",
+      "file": "github.spec.ts",
       "column": 0,
       "line": 0,
       "specs": [],
       "suites": [
         {
-          "title": "1mg Labs Functionality",
-          "file": "labs.spec.ts",
-          "line": 5,
+          "title": "GitHub Authentication Flow",
+          "file": "github.spec.ts",
+          "line": 6,
           "column": 6,
           "specs": [
             {
-              "title": "should successfully search and view CBC test details",
+              "title": "should successfully sign in with valid credentials",
               "ok": false,
               "tags": [],
               "tests": [
@@ -81,66 +81,66 @@
                       "workerIndex": 0,
                       "parallelIndex": 0,
                       "status": "failed",
-                      "duration": 23283,
+                      "duration": 12949,
                       "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\u001b[22m\n",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\u001b[22m\n\n    at LabsPage.searchForTest (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts:38:26)\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labs.spec.ts:14:5",
+                        "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Password')\u001b[22m\n\u001b[2m    - locator resolved to <input id=\"password\" type=\"password\" name=\"password\" disabled=\"true\" required=\"required\" autocomplete=\"current-password\" class=\"form-control form-control js-password-field\"/>\u001b[22m\n\u001b[2m    - fill(\"valid_password\")\u001b[22m\n\u001b[2m  - attempting fill action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    20 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying fill action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+                        "stack": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Password')\u001b[22m\n\u001b[2m    - locator resolved to <input id=\"password\" type=\"password\" name=\"password\" disabled=\"true\" required=\"required\" autocomplete=\"current-password\" class=\"form-control form-control js-password-field\"/>\u001b[22m\n\u001b[2m    - fill(\"valid_password\")\u001b[22m\n\u001b[2m  - attempting fill action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    20 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying fill action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at LoginPage.fill (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/BasePage.ts:15:19)\n    at LoginPage.login (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LoginPage.ts:20:16)\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/github.spec.ts:17:5",
                         "location": {
-                          "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts",
-                          "column": 26,
-                          "line": 38
+                          "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/BasePage.ts",
+                          "column": 19,
+                          "line": 15
                         },
-                        "snippet": "\u001b[90m   at \u001b[39m../pages/LabsPage.ts:38\n\n  36 |     \n  37 |     // Wait for the result to be both attached and visible\n> 38 |     await expect(result).toBeVisible({ timeout: 15000 });\n     |                          ^\n  39 |     await this.click(result);\n  40 |   }\n  41 |"
+                        "snippet": "\u001b[90m   at \u001b[39m../pages/BasePage.ts:15\n\n  13 |\n  14 |   async fill(locator: Locator, value: string) {\n> 15 |     await locator.fill(value);\n     |                   ^\n  16 |   }\n  17 |\n  18 |   async waitForElement(locator: Locator) {"
                       },
                       "errors": [
                         {
                           "location": {
-                            "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts",
-                            "column": 26,
-                            "line": 38
+                            "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/BasePage.ts",
+                            "column": 19,
+                            "line": 15
                           },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\u001b[22m\n\n\n   at ../pages/LabsPage.ts:38\n\n  36 |     \n  37 |     // Wait for the result to be both attached and visible\n> 38 |     await expect(result).toBeVisible({ timeout: 15000 });\n     |                          ^\n  39 |     await this.click(result);\n  40 |   }\n  41 |\n    at LabsPage.searchForTest (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts:38:26)\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labs.spec.ts:14:5"
+                          "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Password')\u001b[22m\n\u001b[2m    - locator resolved to <input id=\"password\" type=\"password\" name=\"password\" disabled=\"true\" required=\"required\" autocomplete=\"current-password\" class=\"form-control form-control js-password-field\"/>\u001b[22m\n\u001b[2m    - fill(\"valid_password\")\u001b[22m\n\u001b[2m  - attempting fill action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    20 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying fill action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n   at ../pages/BasePage.ts:15\n\n  13 |\n  14 |   async fill(locator: Locator, value: string) {\n> 15 |     await locator.fill(value);\n     |                   ^\n  16 |   }\n  17 |\n  18 |   async waitForElement(locator: Locator) {\n    at LoginPage.fill (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/BasePage.ts:15:19)\n    at LoginPage.login (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LoginPage.ts:20:16)\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/github.spec.ts:17:5"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-05-09T19:05:35.468Z",
+                      "startTime": "2026-05-10T07:18:45.815Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labs-1mg-Labs-Functionalit-2cd3d-h-and-view-CBC-test-details-chromium/test-failed-1.png"
+                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/github-GitHub-Authenticati-16a48-n-in-with-valid-credentials-chromium/test-failed-1.png"
                         },
                         {
                           "name": "video",
                           "contentType": "video/webm",
-                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labs-1mg-Labs-Functionalit-2cd3d-h-and-view-CBC-test-details-chromium/video.webm"
+                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/github-GitHub-Authenticati-16a48-n-in-with-valid-credentials-chromium/video.webm"
                         },
                         {
                           "name": "error-context",
                           "contentType": "text/markdown",
-                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labs-1mg-Labs-Functionalit-2cd3d-h-and-view-CBC-test-details-chromium/error-context.md"
+                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/github-GitHub-Authenticati-16a48-n-in-with-valid-credentials-chromium/error-context.md"
                         }
                       ],
                       "errorLocation": {
-                        "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts",
-                        "column": 26,
-                        "line": 38
+                        "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/BasePage.ts",
+                        "column": 19,
+                        "line": 15
                       }
                     }
                   ],
                   "status": "unexpected"
                 }
               ],
-              "id": "b2dde59737ce39e0b8e6-fc6ad5b50b70467842b2",
-              "file": "labs.spec.ts",
-              "line": 13,
+              "id": "2719059dc5d92439b2f4-9a1ed2ad1f2dc79f8307",
+              "file": "github.spec.ts",
+              "line": 12,
               "column": 7
             },
             {
-              "title": "should show no results for an invalid search term",
+              "title": "should show error for invalid credentials",
               "ok": false,
               "tags": [],
               "tests": [
@@ -155,67 +155,67 @@
                       "workerIndex": 1,
                       "parallelIndex": 1,
                       "status": "failed",
-                      "duration": 6606,
+                      "duration": 12227,
                       "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('text=/No results found/i')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=/No results found/i')\u001b[22m\n",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('text=/No results found/i')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=/No results found/i')\u001b[22m\n\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labs.spec.ts:21:45",
+                        "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Password')\u001b[22m\n\u001b[2m    - locator resolved to <input id=\"password\" type=\"password\" name=\"password\" disabled=\"true\" required=\"required\" autocomplete=\"current-password\" class=\"form-control form-control js-password-field\"/>\u001b[22m\n\u001b[2m    - fill(\"wrong_password\")\u001b[22m\n\u001b[2m  - attempting fill action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    20 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying fill action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n",
+                        "stack": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Password')\u001b[22m\n\u001b[2m    - locator resolved to <input id=\"password\" type=\"password\" name=\"password\" disabled=\"true\" required=\"required\" autocomplete=\"current-password\" class=\"form-control form-control js-password-field\"/>\u001b[22m\n\u001b[2m    - fill(\"wrong_password\")\u001b[22m\n\u001b[2m  - attempting fill action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    20 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying fill action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n    at LoginPage.fill (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/BasePage.ts:15:19)\n    at LoginPage.login (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LoginPage.ts:20:16)\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/github.spec.ts:27:5",
                         "location": {
-                          "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labs.spec.ts",
-                          "column": 45,
-                          "line": 21
+                          "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/BasePage.ts",
+                          "column": 19,
+                          "line": 15
                         },
-                        "snippet": "  19 |   test('should show no results for an invalid search term', async () => {\n  20 |     await labsPage.fill(labsPage.searchInput, LABS_DATA.invalidTest);\n> 21 |     await expect(labsPage.noResultsMessage).toBeVisible();\n     |                                             ^\n  22 |   });\n  23 |\n  24 |   test('should trigger booking flow when clicking Book Now', async ({ page }) => {"
+                        "snippet": "\u001b[90m   at \u001b[39m../pages/BasePage.ts:15\n\n  13 |\n  14 |   async fill(locator: Locator, value: string) {\n> 15 |     await locator.fill(value);\n     |                   ^\n  16 |   }\n  17 |\n  18 |   async waitForElement(locator: Locator) {"
                       },
                       "errors": [
                         {
                           "location": {
-                            "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labs.spec.ts",
-                            "column": 45,
-                            "line": 21
+                            "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/BasePage.ts",
+                            "column": 19,
+                            "line": 15
                           },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('text=/No results found/i')\nExpected: visible\nTimeout: 5000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for locator('text=/No results found/i')\u001b[22m\n\n\n  19 |   test('should show no results for an invalid search term', async () => {\n  20 |     await labsPage.fill(labsPage.searchInput, LABS_DATA.invalidTest);\n> 21 |     await expect(labsPage.noResultsMessage).toBeVisible();\n     |                                             ^\n  22 |   });\n  23 |\n  24 |   test('should trigger booking flow when clicking Book Now', async ({ page }) => {\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labs.spec.ts:21:45"
+                          "message": "TimeoutError: locator.fill: Timeout 10000ms exceeded.\nCall log:\n\u001b[2m  - waiting for getByLabel('Password')\u001b[22m\n\u001b[2m    - locator resolved to <input id=\"password\" type=\"password\" name=\"password\" disabled=\"true\" required=\"required\" autocomplete=\"current-password\" class=\"form-control form-control js-password-field\"/>\u001b[22m\n\u001b[2m    - fill(\"wrong_password\")\u001b[22m\n\u001b[2m  - attempting fill action\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m    - waiting 20ms\u001b[22m\n\u001b[2m    2 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m      - element is not enabled\u001b[22m\n\u001b[2m    - retrying fill action\u001b[22m\n\u001b[2m      - waiting 100ms\u001b[22m\n\u001b[2m    20 × waiting for element to be visible, enabled and editable\u001b[22m\n\u001b[2m       - element is not enabled\u001b[22m\n\u001b[2m     - retrying fill action\u001b[22m\n\u001b[2m       - waiting 500ms\u001b[22m\n\n\n   at ../pages/BasePage.ts:15\n\n  13 |\n  14 |   async fill(locator: Locator, value: string) {\n> 15 |     await locator.fill(value);\n     |                   ^\n  16 |   }\n  17 |\n  18 |   async waitForElement(locator: Locator) {\n    at LoginPage.fill (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/BasePage.ts:15:19)\n    at LoginPage.login (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LoginPage.ts:20:16)\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/github.spec.ts:27:5"
                         }
                       ],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-05-09T19:05:35.470Z",
+                      "startTime": "2026-05-10T07:18:45.817Z",
                       "annotations": [],
                       "attachments": [
                         {
                           "name": "screenshot",
                           "contentType": "image/png",
-                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labs-1mg-Labs-Functionalit-1364c--for-an-invalid-search-term-chromium/test-failed-1.png"
+                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/github-GitHub-Authenticati-3ab17-ror-for-invalid-credentials-chromium/test-failed-1.png"
                         },
                         {
                           "name": "video",
                           "contentType": "video/webm",
-                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labs-1mg-Labs-Functionalit-1364c--for-an-invalid-search-term-chromium/video.webm"
+                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/github-GitHub-Authenticati-3ab17-ror-for-invalid-credentials-chromium/video.webm"
                         },
                         {
                           "name": "error-context",
                           "contentType": "text/markdown",
-                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labs-1mg-Labs-Functionalit-1364c--for-an-invalid-search-term-chromium/error-context.md"
+                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/github-GitHub-Authenticati-3ab17-ror-for-invalid-credentials-chromium/error-context.md"
                         }
                       ],
                       "errorLocation": {
-                        "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labs.spec.ts",
-                        "column": 45,
-                        "line": 21
+                        "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/BasePage.ts",
+                        "column": 19,
+                        "line": 15
                       }
                     }
                   ],
                   "status": "unexpected"
                 }
               ],
-              "id": "b2dde59737ce39e0b8e6-44091517046f6c2c0481",
-              "file": "labs.spec.ts",
-              "line": 19,
+              "id": "2719059dc5d92439b2f4-f5474cf5f0c11d4539d6",
+              "file": "github.spec.ts",
+              "line": 22,
               "column": 7
             },
             {
-              "title": "should trigger booking flow when clicking Book Now",
-              "ok": false,
+              "title": "should show validation error when fields are empty",
+              "ok": true,
               "tags": [],
               "tests": [
                 {
@@ -228,63 +228,29 @@
                     {
                       "workerIndex": 2,
                       "parallelIndex": 2,
-                      "status": "failed",
-                      "duration": 22589,
-                      "error": {
-                        "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\u001b[22m\n",
-                        "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\u001b[22m\n\n    at LabsPage.searchForTest (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts:38:26)\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labs.spec.ts:25:5",
-                        "location": {
-                          "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts",
-                          "column": 26,
-                          "line": 38
-                        },
-                        "snippet": "\u001b[90m   at \u001b[39m../pages/LabsPage.ts:38\n\n  36 |     \n  37 |     // Wait for the result to be both attached and visible\n> 38 |     await expect(result).toBeVisible({ timeout: 15000 });\n     |                          ^\n  39 |     await this.click(result);\n  40 |   }\n  41 |"
-                      },
-                      "errors": [
-                        {
-                          "location": {
-                            "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts",
-                            "column": 26,
-                            "line": 38
-                          },
-                          "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m(\u001b[22m\u001b[2m)\u001b[22m failed\n\nLocator: locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\nExpected: visible\nTimeout: 15000ms\nError: element(s) not found\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 15000ms\u001b[22m\n\u001b[2m  - waiting for locator('[data-testid=\"search-result\"]').filter({ hasText: 'CBC' }).first()\u001b[22m\n\n\n   at ../pages/LabsPage.ts:38\n\n  36 |     \n  37 |     // Wait for the result to be both attached and visible\n> 38 |     await expect(result).toBeVisible({ timeout: 15000 });\n     |                          ^\n  39 |     await this.click(result);\n  40 |   }\n  41 |\n    at LabsPage.searchForTest (/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts:38:26)\n    at /Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/tests/labs.spec.ts:25:5"
-                        }
-                      ],
+                      "status": "passed",
+                      "duration": 3341,
+                      "errors": [],
                       "stdout": [],
                       "stderr": [],
                       "retry": 0,
-                      "startTime": "2026-05-09T19:05:35.471Z",
+                      "startTime": "2026-05-10T07:18:45.818Z",
                       "annotations": [],
                       "attachments": [
                         {
-                          "name": "screenshot",
-                          "contentType": "image/png",
-                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labs-1mg-Labs-Functionalit-ae237-flow-when-clicking-Book-Now-chromium/test-failed-1.png"
-                        },
-                        {
                           "name": "video",
                           "contentType": "video/webm",
-                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labs-1mg-Labs-Functionalit-ae237-flow-when-clicking-Book-Now-chromium/video.webm"
-                        },
-                        {
-                          "name": "error-context",
-                          "contentType": "text/markdown",
-                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/labs-1mg-Labs-Functionalit-ae237-flow-when-clicking-Book-Now-chromium/error-context.md"
+                          "path": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/recordings/github-GitHub-Authenticati-7daa0-error-when-fields-are-empty-chromium/video.webm"
                         }
-                      ],
-                      "errorLocation": {
-                        "file": "/Users/naman/Desktop/Doc/Repo/playwright-ai-framework/playwright/pages/LabsPage.ts",
-                        "column": 26,
-                        "line": 38
-                      }
+                      ]
                     }
                   ],
-                  "status": "unexpected"
+                  "status": "expected"
                 }
               ],
-              "id": "b2dde59737ce39e0b8e6-b06125de26fc49283dbc",
-              "file": "labs.spec.ts",
-              "line": 24,
+              "id": "2719059dc5d92439b2f4-9143e5302c0c1457abd1",
+              "file": "github.spec.ts",
+              "line": 32,
               "column": 7
             }
           ]
@@ -294,11 +260,11 @@
   ],
   "errors": [],
   "stats": {
-    "startTime": "2026-05-09T19:05:35.233Z",
-    "duration": 23836.049000000003,
-    "expected": 0,
+    "startTime": "2026-05-10T07:18:45.552Z",
+    "duration": 13636.562,
+    "expected": 1,
     "skipped": 0,
-    "unexpected": 3,
+    "unexpected": 2,
     "flaky": 0
   }
 }

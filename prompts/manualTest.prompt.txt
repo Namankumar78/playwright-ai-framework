@@ -1,10 +1,9 @@
-Navigate to https://www.1mg.com/labs
+Navigate to {{baseURL}}
 
 Test Scenario:
-1. Enter for "CBC" in "Search tests or full body checkups" field
-2. Click on search button
-3. Select first item from dropdown
-4. If any popup appears on any screen, close it
-5. Validate navigation by checking:
-  - "CBC (Complete Blood Count)" text is visible
-  - "Book Now" button is visible
+Step - 1 -> Search for "GITHUB", validate the searched Page
+Step - 2 -> Click on login link, validate the Sign in to GitHub Page
+Step - 3 -> Enter Username "namankumar", validate the Username entered
+Step - 4 -> Enter Password "namankumar", validate the Password entered
+Step - 5 -> Hit the signin button
+
