@@ -591,11 +591,8 @@ function readExistingPages() {
 // ==============================
 
 async function run() {
-  const promptPath = path.resolve('prompts/manualTest.prompt.txt');
 
-  const promptTemplate = fs.readFileSync(promptPath, 'utf-8');
-
-  const manual = await generateTests(promptTemplate);
+  const manual = await generateTests();
 
   const validated = await validateTests(manual);
 

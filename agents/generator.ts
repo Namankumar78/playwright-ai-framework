@@ -7,8 +7,11 @@ import fs from 'fs';
  * Generates Playwright automation tests with built-in
  * Rate Limit (429) handling and retry logic.
  */
-export async function generateTests(userPrompt: any) {
+export async function generateTests() {
   // 📄 Read prompt file
+  const manualPromptPath = path.resolve('prompts/manualTest.prompt.txt');
+  const manualPromptTemplate = fs.readFileSync(manualPromptPath, 'utf-8');
+
   const promptPath = path.resolve('prompts/generate.prompt.txt');
   const promptTemplate = fs.readFileSync(promptPath, 'utf-8');
 
@@ -33,7 +36,7 @@ export async function generateTests(userPrompt: any) {
     try {
       console.log(`[AI Generator] Attempt ${i + 1}: Generating tests...`);
 
-      const result = await model.generateContent(`${promptTemplate}\n\nTask: ${userPrompt}`);
+      const result = await model.generateContent(`${promptTemplate}\n\nTask: ${manualPromptTemplate}`);
       const response = await result.response;
 
       return response.text();
