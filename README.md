@@ -377,6 +377,6 @@ npx playwright test
 
 ---
 
-# License
+# Created By
 
-MIT
+Naman Kumar
