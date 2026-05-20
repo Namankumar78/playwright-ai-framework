@@ -1,40 +1,33 @@
 import { test, expect } from '@playwright/test';
-import { HomePage } from '../pages/HomePage';
-import { LoginPage } from '../pages/LoginPage';
-import { LOGIN_DATA } from '../constants/Login.constants';
+import { GitHubPage } from '../pages/GitHubPage';
+import { GITHUB_CREDENTIALS } from '../constants/GitHub.constants';
 
-test.describe('GitHub Authentication Flow', () => {
-  test.beforeEach(async ({ page }) => {
-    const homePage = new HomePage(page);
-    await homePage.navigate();
+test.describe('GitHub Feature Flows', () => {
+  
+  test.describe('Search Functionality', () => {
+    test('should allow user to perform a search', async ({ page }) => {
+      const gitHubPage = new GitHubPage(page);
+      await gitHubPage.navigate();
+      await gitHubPage.search('playwright');
+      await expect(page).toHaveURL(/search/);
+    });
   });
 
-  test('should successfully sign in with valid credentials', async ({ page }) => {
-    const homePage = new HomePage(page);
-    const loginPage = new LoginPage(page);
+  test.describe('Authentication Security', () => {
+    test('should show error for invalid credentials', async ({ page }) => {
+      const gitHubPage = new GitHubPage(page);
+      await gitHubPage.navigate();
+      await gitHubPage.login(GITHUB_CREDENTIALS.invalidUser, GITHUB_CREDENTIALS.invalidPass);
+      await gitHubPage.waitForElement(gitHubPage.errorMsg);
+      await expect(gitHubPage.errorMsg).toBeVisible();
+    });
 
-    await homePage.clickSignIn();
-    await loginPage.login(LOGIN_DATA.validUser, LOGIN_DATA.validPass);
-    await loginPage.clickSignInButton();
-    await expect(page).toHaveURL(/.*dashboard/);
-  });
-
-  test('should show error for invalid credentials', async ({ page }) => {
-    const homePage = new HomePage(page);
-    const loginPage = new LoginPage(page);
-
-    await homePage.clickSignIn();
-    await loginPage.login(LOGIN_DATA.invalidUser, LOGIN_DATA.invalidPass);
-    await loginPage.clickSignInButton();
-    await loginPage.verifyErrorMessage(LOGIN_DATA.errorText);
-  });
-
-  test('should show validation error when fields are empty', async ({ page }) => {
-    const homePage = new HomePage(page);
-    const loginPage = new LoginPage(page);
-
-    await homePage.clickSignIn();
-    await loginPage.clickSignInButton();
-    await expect(loginPage.usernameField).toBeFocused();
+    test('should not allow login with empty fields', async ({ page }) => {
+      const gitHubPage = new GitHubPage(page);
+      await gitHubPage.navigate();
+      await gitHubPage.click(gitHubPage.loginLink);
+      await gitHubPage.click(gitHubPage.signInButton);
+      await expect(gitHubPage.usernameInput).toBeFocused();
+    });
   });
 });

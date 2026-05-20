@@ -1,4 +1,4 @@
-import { Page, Locator } from '@playwright/test';
+import { Page, Locator, expect } from '@playwright/test';
 
 export class BasePage {
   readonly page: Page;
@@ -16,16 +16,16 @@ export class BasePage {
   }
 
   async waitForElement(locator: Locator) {
-    await locator.waitFor({ state: 'visible' });
+    await expect(locator).toBeVisible();
   }
 
   async handlePopup(locator: Locator) {
     try {
-      if (await locator.isVisible({ timeout: 5000 })) {
+      if (await locator.isVisible()) {
         await locator.click();
       }
-    } catch (e) {
-      // Popup not found, continue execution
+    } catch (error) {
+      console.log('No popup found');
     }
   }
 }
