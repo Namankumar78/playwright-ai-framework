@@ -14,19 +14,17 @@ export async function generateTests() {
   const manualPromptPath = path.resolve('prompts/manualTest.prompt.txt');
   const manualPromptTemplate = fs.readFileSync(manualPromptPath, 'utf-8');
 
+  //// Featching Jira ticket details (if needed for the prompt)
+  // const jiraId = 'PROJ-123'; // Example Jira ID, replace with dynamic value as needed
+  //  const jiraTicket = await fetchJiraTicket(jiraId);
 
-//// Featching Jira ticket details (if needed for the prompt)
-// const jiraId = 'PROJ-123'; // Example Jira ID, replace with dynamic value as needed
-//  const jiraTicket = await fetchJiraTicket(jiraId);
+  //   const promptPath = path.resolve('prompts/jiraTest.prompt.txt');
+  //   const promptTemplate = fs.readFileSync(promptPath, 'utf-8');
 
-//   const promptPath = path.resolve('prompts/jiraTest.prompt.txt');
-//   const promptTemplate = fs.readFileSync(promptPath, 'utf-8');
-
-//   const finalPrompt = promptTemplate.replace(
-//     '{{jiraTicket}}',
-//     JSON.stringify(jiraTicket, null, 2)
-//   );
-
+  //   const finalPrompt = promptTemplate.replace(
+  //     '{{jiraTicket}}',
+  //     JSON.stringify(jiraTicket, null, 2)
+  //   );
 
   const retries = 1;
   const delay = 21000; // 21 seconds (Gemini's typical retry window)
@@ -35,7 +33,9 @@ export async function generateTests() {
     try {
       console.log(`[AI Generator] Attempt ${i + 1}: Generating tests...`);
 
-      const result = await model.generateContent(`${promptTemplate}\n\nTask: ${manualPromptTemplate}`);
+      const result = await model.generateContent(
+        `${promptTemplate}\n\nTask: ${manualPromptTemplate}`
+      );
       const response = await result.response;
 
       return response.text();

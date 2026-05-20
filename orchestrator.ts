@@ -2,7 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
 
-import { chromium } from '@playwright/test';
+import { chromium, Locator } from '@playwright/test';
 
 import config from './playwright.config';
 
@@ -30,6 +30,30 @@ function cleanCodeBlock(code: string) {
     .replace(/```json/g, '')
     .replace(/```/g, '')
     .trim();
+}
+
+async function captureLocatorMeta(locator: Locator) {
+  return await locator.evaluate((el: any) => ({
+    tag: el.tagName?.toLowerCase(),
+
+    text: el.innerText?.trim(),
+
+    aria: el.getAttribute('aria-label'),
+
+    role: el.getAttribute('role'),
+
+    testid: el.getAttribute('data-testid'),
+
+    placeholder: el.getAttribute('placeholder'),
+
+    id: el.id,
+
+    class: el.className,
+
+    name: el.getAttribute('name'),
+
+    type: el.getAttribute('type'),
+  }));
 }
 
 function toStringSafe(data: any) {
@@ -405,6 +429,10 @@ async function writeAutomationFiles(automation: any) {
 // BUILD DOM TIMELINE
 // ==============================
 
+// ==============================
+// BUILD DOM TIMELINE
+// ==============================
+
 async function buildDOMTimeline(navigationPlan: any) {
   const browser = await chromium.launch({
     headless: false,
@@ -438,6 +466,10 @@ async function buildDOMTimeline(navigationPlan: any) {
         console.log(`🚀 Executing Step: ${JSON.stringify(step)}`);
 
         switch (step.action) {
+          // ==============================
+          // FILL
+          // ==============================
+
           case 'fill': {
             const locator = page.locator(step.selector || 'input').first();
 
@@ -446,16 +478,48 @@ async function buildDOMTimeline(navigationPlan: any) {
               timeout: 10000,
             });
 
+            // Capture locator metadata
+            const locatorMeta = await captureLocatorMeta(locator);
+
+            // Save timeline
+            domTimeline.push({
+              action: 'fill',
+
+              value: step.value,
+
+              locator: {
+                role: locatorMeta.role,
+
+                text: locatorMeta.text,
+
+                testId: locatorMeta.testid,
+
+                placeholder: locatorMeta.placeholder,
+
+                label: locatorMeta.aria,
+
+                id: locatorMeta.id,
+
+                class: locatorMeta.class,
+
+                name: locatorMeta.name,
+
+                type: locatorMeta.type,
+              },
+
+              timestamp: Date.now(),
+            });
+
+            console.log('🧠 MCP Locator Captured:', locatorMeta);
+
             await locator.fill(step.value || '');
 
             break;
           }
 
-          case 'press': {
-            await page.keyboard.press(step.key || 'Enter');
-
-            break;
-          }
+          // ==============================
+          // CLICK
+          // ==============================
 
           case 'click': {
             let locator;
@@ -471,6 +535,8 @@ async function buildDOMTimeline(navigationPlan: any) {
             }
 
             if (!locator) {
+              console.log('⚠️ No locator found');
+
               continue;
             }
 
@@ -481,23 +547,129 @@ async function buildDOMTimeline(navigationPlan: any) {
               timeout: 10000,
             });
 
+            // Capture locator metadata
+            const locatorMeta = await captureLocatorMeta(first);
+
+            // Save timeline
+            domTimeline.push({
+              action: 'click',
+
+              locator: {
+                role: locatorMeta.role,
+
+                text: locatorMeta.text,
+
+                testId: locatorMeta.testid,
+
+                placeholder: locatorMeta.placeholder,
+
+                label: locatorMeta.aria,
+
+                id: locatorMeta.id,
+
+                class: locatorMeta.class,
+
+                name: locatorMeta.name,
+
+                type: locatorMeta.type,
+              },
+
+              timestamp: Date.now(),
+            });
+
+            console.log('🧠 MCP Locator Captured:', locatorMeta);
+
             await first.click();
 
             break;
           }
 
+          // ==============================
+          // PRESS
+          // ==============================
+
+          case 'press': {
+            domTimeline.push({
+              action: 'press',
+
+              key: step.key || 'Enter',
+
+              timestamp: Date.now(),
+            });
+
+            await page.keyboard.press(step.key || 'Enter');
+
+            break;
+          }
+
+          // ==============================
+          // WAIT FOR TEXT
+          // ==============================
+
+          case 'waitForText': {
+            const locator = page.getByText(step.text);
+
+            await locator.waitFor({
+              state: 'visible',
+              timeout: 15000,
+            });
+
+            const locatorMeta = await captureLocatorMeta(locator.first());
+
+            domTimeline.push({
+              action: 'waitForText',
+
+              locator: {
+                role: locatorMeta.role,
+
+                text: locatorMeta.text,
+
+                testId: locatorMeta.testid,
+
+                placeholder: locatorMeta.placeholder,
+
+                label: locatorMeta.aria,
+              },
+
+              timestamp: Date.now(),
+            });
+
+            break;
+          }
+
+          // ==============================
+          // NAVIGATE
+          // ==============================
+
           case 'navigate': {
             const url = `${baseURL}${step.url}`;
 
+            domTimeline.push({
+              action: 'navigate',
+
+              url,
+
+              timestamp: Date.now(),
+            });
+
             await page.goto(url, {
               waitUntil: 'domcontentloaded',
+
               timeout: 30000,
             });
 
             break;
           }
+
+          // ==============================
+          // UNKNOWN
+          // ==============================
+
+          default:
+            console.log(`⚠️ Unknown action: ${step.action}`);
         }
 
+        // Small stabilization wait
         await page.waitForTimeout(2000);
       } catch (err) {
         console.log(`❌ Step Failed: ${JSON.stringify(step)}`);
@@ -520,16 +692,16 @@ async function buildDOMTimeline(navigationPlan: any) {
 
 async function runPlaywrightTests(specFile: string) {
   try {
-    execSync(`npx playwright test ./playwright/tests/${specFile} --reporter=json > report.json`, {
-      stdio: 'inherit',
+    execSync(`npx playwright test ./playwright/tests/${specFile} --reporter=line`, {
+      stdio: 'pipe',
     });
 
     return {
       passed: true,
       logs: '',
     };
-  } catch {
-    const logs = fs.existsSync('report.json') ? fs.readFileSync('report.json', 'utf-8') : '';
+  } catch (error: any) {
+    const logs = error?.stdout?.toString() || error?.stderr?.toString() || '';
 
     return {
       passed: false,
@@ -591,19 +763,9 @@ function readExistingPages() {
 // ==============================
 
 async function run() {
-
-
   const manual = await generateTests();
 
   const validated = await validateTests(manual);
-
-  const approved = await humanApproval(validated);
-
-  if (!approved) {
-    console.log('❌ Rejected by human');
-
-    return;
-  }
 
   const plan = await generateNavigationPlan(validated);
 
@@ -629,14 +791,56 @@ RULES:
 DOM TIMELINE:
 ${JSON.stringify(timeline, null, 2)}
 
-IMPORTANT:
-- Use Playwright TS
+==================================================
+LOCATOR RULES
+==================================================
+
+USE DOM TIMELINE LOCATORS FIRST.
+
+For every action:
+- Use captured MCP locators
+- Do NOT invent selectors
+- Prefer stable Playwright locators
+
+Priority Order:
+1. getByTestId()
+2. getByRole()
+3. getByLabel()
+4. getByPlaceholder()
+5. locator('#id')
+6. locator('.class')
+7. xpath ONLY as final fallback
+
+Avoid:
+- nth-child
+- generic div selectors
+- absolute xpath
+- weak getByText()
+
+==================================================
+FRAMEWORK RULES
+==================================================
+
+- Reuse existing pages
+- Add ONLY missing methods
+- Do NOT duplicate methods
+- Create NEW spec file only
+- Do NOT modify old specs
 - Use BasePage
 - Use constants
-- Use unique locators only
+- Use Playwright TypeScript
+
 `;
 
   const automation = await generateWithValidation(enrichedInput);
+
+  const approved = await humanApproval(validated);
+
+  if (!approved) {
+    console.log('❌ Rejected by human');
+
+    return;
+  }
 
   const generatedFiles = await writeAutomationFiles(automation);
 

@@ -14,8 +14,8 @@ export async function fetchJiraTicket(jiraId: string) {
     method: 'GET',
     headers: {
       Authorization: `Basic ${auth}`,
-      Accept: 'application/json'
-    }
+      Accept: 'application/json',
+    },
   });
 
   if (!response.ok) {
@@ -30,6 +30,6 @@ export async function fetchJiraTicket(jiraId: string) {
     description: data.fields.description,
     priority: data.fields.priority?.name,
     status: data.fields.status?.name,
-    acceptanceCriteria: data.fields.customfield_XXXXX || []
+    acceptanceCriteria: data.fields.customfield_XXXXX || [],
   };
 }

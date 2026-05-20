@@ -3,5 +3,5 @@ export const LOGIN_DATA = {
   validPass: 'valid_password',
   invalidUser: 'wrong_user',
   invalidPass: 'wrong_password',
-  errorText: 'Incorrect username or password'
+  errorText: 'Incorrect username or password',
 };

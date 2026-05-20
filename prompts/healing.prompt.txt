@@ -28,19 +28,89 @@ CRITICAL RULES
 - Add wrapper methods for old name
 
 ==================================================
-LOCATOR RULES
+LOCATOR STRATEGY RULES
 ==================================================
 
-Prefer:
-- getByRole()
-- getByLabel()
-- getByTestId()
-- locator().filter({ hasText })
+PRIORITY ORDER:
+
+1. getByTestId()
+2. getByRole()
+3. getByLabel()
+4. getByPlaceholder()
+5. getByText()
+6. locator().filter({ hasText })
+7. CSS selectors
+8. XPath ONLY as last fallback
+
+==================================================
+MCP LOCATOR USAGE
+==================================================
+
+Use locator metadata captured by MCP runtime.
+
+Prefer stable attributes:
+- data-testid
+- aria-label
+- role
+- name
+- placeholder
+- accessible text
+
+Generate selectors from REAL browser elements only.
+
+==================================================
+AVOID
+==================================================
+
+Never use:
+- nth-child
+- deeply nested CSS
+- auto-generated classes
+- dynamic IDs
+- generic div selectors
+- brittle XPath
+- index-based locators
 
 Avoid:
-- nth-child
-- generic div selectors
-- overly broad getByText()
+- page.locator('div')
+- page.locator('button').nth(3)
+
+==================================================
+PREFERRED EXAMPLES
+==================================================
+
+GOOD:
+page.getByRole('button', { name: 'Login' })
+
+GOOD:
+page.getByTestId('submit-btn')
+
+GOOD:
+page.getByLabel('Email')
+
+GOOD:
+page.getByPlaceholder('Search')
+
+BAD:
+page.locator('div > div:nth-child(2) > button')
+
+BAD:
+page.locator('.css-1abcxyz')
+
+==================================================
+SELF-HEALING RULES
+==================================================
+
+If locator changes during healing:
+- update page methods
+- update locator constants
+- update generated spec automatically
+
+Never modify unrelated specs/pages.
+
+Heal ONLY:
+- failed page
+- generated spec
 
 ==================================================
 FAILED FILE

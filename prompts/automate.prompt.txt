@@ -76,57 +76,90 @@ page
   .filter({ hasText: 'CBC (Complete Blood Count)' })
   .getByRole('button', { name: 'BOOK' })
 
-========================
-LOCATOR RELIABILITY RULES (MANDATORY)
-========================
+==================================================
+LOCATOR STRATEGY RULES
+==================================================
 
-- EVERY locator MUST resolve to EXACTLY ONE element
+PRIORITY ORDER:
 
-Priority Order:
-1. getByRole()
-2. getByLabel()
-3. getByTestId()
-4. locator().filter({ hasText })
+1. getByTestId()
+2. getByRole()
+3. getByLabel()
+4. getByPlaceholder()
+5. getByText()
+6. locator().filter({ hasText })
+7. CSS selectors
+8. XPath ONLY as last fallback
 
-Preferred Patterns:
-- page.getByRole('button', { name: 'Search' })
-- page.getByLabel('Username')
-- locator('[data-testid="search-result"]')
+==================================================
+MCP LOCATOR USAGE
+==================================================
+
+Use locator metadata captured by MCP runtime.
+
+Prefer stable attributes:
+- data-testid
+- aria-label
+- role
+- name
+- placeholder
+- accessible text
+
+Generate selectors from REAL browser elements only.
+
+==================================================
+AVOID
+==================================================
+
+Never use:
+- nth-child
+- deeply nested CSS
+- auto-generated classes
+- dynamic IDs
+- generic div selectors
+- brittle XPath
+- index-based locators
 
 Avoid:
-- locator('div')
-- locator('span')
-- nth-child
-- generic getByText()
-- generic button selectors
+- page.locator('div')
+- page.locator('button').nth(3)
 
-If multiple elements match:
-- scope locator within parent container
-- OR use .filter({ hasText })
-- OR use exact: true
-- OR use .first() ONLY as last fallback
-
-Examples:
-
-BAD:
-page.getByRole('button', { name: /BOOK/ })
+==================================================
+PREFERRED EXAMPLES
+==================================================
 
 GOOD:
-page
-  .locator('[data-testid="search-result"]')
-  .getByRole('button', { name: 'BOOK' })
-
-BAD:
-page.getByText('CBC')
+page.getByRole('button', { name: 'Login' })
 
 GOOD:
-page.getByRole('heading', {
-  name: 'CBC (Complete Blood Count)',
-  exact: true
-})
+page.getByTestId('submit-btn')
 
-- NEVER generate locators that match multiple elements
-- If locator uniqueness is uncertain, generate scoped locator
+GOOD:
+page.getByLabel('Email')
+
+GOOD:
+page.getByPlaceholder('Search')
+
+BAD:
+page.locator('div > div:nth-child(2) > button')
+
+BAD:
+page.locator('.css-1abcxyz')
+
+==================================================
+SELF-HEALING RULES
+==================================================
+
+If locator changes during healing:
+- update page methods
+- update locator constants
+- update generated spec automatically
+
+Never modify unrelated specs/pages.
+
+Heal ONLY:
+- failed page
+- generated spec
 
 ========================
 EXECUTION RULES
