@@ -763,6 +763,7 @@ function readExistingPages() {
 // ==============================
 
 async function run() {
+  
   const manual = await generateTests();
 
   const validated = await validateTests(manual);
@@ -773,64 +774,15 @@ async function run() {
 
   const existingPages = readExistingPages();
 
-  const enrichedInput = `
-TEST CASE:
-${validated}
+  const enrichPromptPath = path.resolve('prompts/enrich.prompt.txt');
 
-EXISTING FRAMEWORK:
-${JSON.stringify(existingPages, null, 2)}
+  let enrichTemplate = fs.readFileSync(enrichPromptPath,'utf-8');
 
-RULES:
-- Reuse existing pages if relevant
-- Do NOT duplicate methods
-- Add ONLY missing methods
-- Create NEW spec file only
-- Do NOT modify existing specs
-- Use existing pages if possible
-
-DOM TIMELINE:
-${JSON.stringify(timeline, null, 2)}
-
-==================================================
-LOCATOR RULES
-==================================================
-
-USE DOM TIMELINE LOCATORS FIRST.
-
-For every action:
-- Use captured MCP locators
-- Do NOT invent selectors
-- Prefer stable Playwright locators
-
-Priority Order:
-1. getByTestId()
-2. getByRole()
-3. getByLabel()
-4. getByPlaceholder()
-5. locator('#id')
-6. locator('.class')
-7. xpath ONLY as final fallback
-
-Avoid:
-- nth-child
-- generic div selectors
-- absolute xpath
-- weak getByText()
-
-==================================================
-FRAMEWORK RULES
-==================================================
-
-- Reuse existing pages
-- Add ONLY missing methods
-- Do NOT duplicate methods
-- Create NEW spec file only
-- Do NOT modify old specs
-- Use BasePage
-- Use constants
-- Use Playwright TypeScript
-
-`;
+  const enrichedInput = enrichTemplate
+    .replace('{{TEST_CASE}}', validated)
+    .replace('{{EXISTING_FRAMEWORK}}', JSON.stringify( existingPages, null, 2 )  )
+    .replace('{{DOM_TIMELINE}}',JSON.stringify(timeline,null,2)
+    );
 
   const automation = await generateWithValidation(enrichedInput);
 

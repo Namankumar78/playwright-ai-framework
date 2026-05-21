@@ -1,6 +1,72 @@
- Validate and improve these test cases:
-  - Remove duplicates
-  - Add missing edge cases
-  - Improve clarity
+Validate and improve these Playwright manual test cases.
 
-  {{testCases}}
+GOALS:
+- Make tests executable for automation
+- Improve clarity
+- Ensure logical flow
+- Ensure complete navigation
+- Ensure assertions exist
+- Ensure every step is actionable
+- Remove duplicate steps
+- Add missing validation steps
+- Add missing edge cases
+- Convert vague steps into atomic actions
+
+==================================================
+VALIDATION RULES
+==================================================
+
+1. Every test must contain:
+- Preconditions
+- Test steps
+- Expected result
+
+2. Every user action must be explicit:
+GOOD:
+- Click Login button
+- Enter username into Username field
+
+BAD:
+- Login to app
+- Verify functionality
+
+3. Ensure:
+- No duplicated steps
+- No missing navigation
+- No impossible actions
+- No ambiguous wording
+- No generic validations
+
+4. Add missing assertions:
+Examples:
+- Verify dashboard is visible
+- Verify error message appears
+- Verify user redirected successfully
+
+5. Add missing edge cases if relevant:
+Examples:
+- Invalid credentials
+- Empty field validation
+- Session timeout
+- Unauthorized access
+
+6. Steps must be atomic:
+GOOD:
+- Click Login
+- Verify Dashboard page
+
+BAD:
+- Login and verify dashboard
+
+7. Ensure tests are automation-friendly:
+- Avoid human wording
+- Avoid assumptions
+- Use deterministic actions
+
+==================================================
+OUTPUT FORMAT
+==================================================
+
+Return clean validated test cases only.
+
+{{testCases}}

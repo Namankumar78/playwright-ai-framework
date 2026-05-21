@@ -1,0 +1,47 @@
+TEST CASE:
+{{TEST_CASE}}
+
+EXISTING FRAMEWORK:
+{{EXISTING_FRAMEWORK}}
+
+DOM TIMELINE:
+{{DOM_TIMELINE}}
+
+==================================================
+LOCATOR RULES
+==================================================
+
+USE DOM TIMELINE LOCATORS FIRST.
+
+For every action:
+- Use captured MCP locators
+- Do NOT invent selectors
+- Prefer stable Playwright locators
+
+Priority Order:
+1. getByTestId()
+2. getByRole()
+3. getByLabel()
+4. getByPlaceholder()
+5. locator('#id')
+6. locator('.class')
+7. xpath ONLY as final fallback
+
+Avoid:
+- nth-child
+- generic div selectors
+- absolute xpath
+- weak getByText()
+
+==================================================
+FRAMEWORK RULES
+==================================================
+
+- Reuse existing pages
+- Add ONLY missing methods
+- Do NOT duplicate methods
+- Create NEW spec file only
+- Do NOT modify old specs
+- Use BasePage
+- Use constants
+- Use Playwright TypeScript

@@ -1,382 +1,365 @@
 # AI Playwright Self-Healing Framework
 
-An AI-powered Playwright automation framework that can:
+# An AI-powered Playwright automation framework capable of:
 
-- Generate automation from manual test cases
-- Reuse existing framework code
-- Create Page Object Models automatically
-- Heal broken locators
-- Synchronize spec methods automatically
-- Merge new methods into existing pages
-- Run selective healing on failed pages only
+- Generating Playwright automation from manual test cases
+- Executing browser steps using Playwright MCP
+- Capturing real DOM locator intelligence
+- Creating reusable Page Object Models
+- Reusing existing framework components
+- Automatically healing broken locators
+- Updating spec methods during healing
+- Running selective healing on failed pages only
 
----
+==================================================
+# ARCHITECTURE FLOW
+==================================================
 
-# Features
+Manual Test
+    ↓
+Validation Agent
+    ↓
+Navigation Planner
+    ↓
+MCP Browser Execution
+    ↓
+DOM Timeline Capture
+    ↓
+Automation Generator
+    ↓
+Playwright Execution
+    ↓
+Failure Analysis
+    ↓
+Self Healing
+    ↓
+Spec Synchronization
 
-## AI Test Generation
+==================================================
+# FEATURES
+==================================================
+
+# AI Test Generation
 
 Generate:
-
 - Playwright tests
 - Page Object Models
 - Constants
 - Navigation flows
+- Assertions
+- Reusable methods
 
 from plain English/manual test cases.
 
----
+==================================================
+# MCP BROWSER EXECUTION
+==================================================
 
-## Self-Healing Automation
+# Before generating automation:
 
-When a test fails:
+1. AI creates navigation plan
+2. Playwright MCP executes steps
+3. Framework captures:
+   - real locators
+   - DOM structure
+   - roles
+   - labels
+   - placeholders
+   - test IDs
+4. AI uses real browser intelligence for generation
 
-1. Framework analyzes failure logs
-2. Detects failed page automatically
-3. Regenerates ONLY broken page
-4. Updates spec methods if method names changed
-5. Re-runs failed spec
+This drastically improves locator quality.
 
----
+==================================================
+# DOM TIMELINE INTELLIGENCE
+==================================================
 
-## Smart Spec Synchronization
+# Framework captures:
+
+{
+  action: "click",
+
+  element: {
+    role: "button",
+    text: "Login",
+    testId: "login-btn",
+    placeholder: null,
+    label: null,
+    css: "button.submit-btn",
+    xpath: "//button[text()='Login']"
+  }
+}
+
+This allows AI to generate stable Playwright locators.
+
+==================================================
+# LOCATOR PRIORITY RULES
+==================================================
+
+# Framework always prefers:
+
+1. getByTestId()
+2. getByRole()
+3. getByLabel()
+4. getByPlaceholder()
+5. locator('#id')
+6. locator('.class')
+7. xpath as last fallback
+
+# Avoided selectors:
+
+- nth-child
+- absolute xpath
+- generic div selectors
+- weak getByText()
+
+==================================================
+# SMART PAGE REUSE
+==================================================
+
+# Framework:
+- reuses existing pages
+- merges only missing methods
+- avoids duplicate code
+- creates new pages only if required
+
+==================================================
+# SMART SPEC SYNCHRONIZATION
+==================================================
 
 If healing changes method names:
 
 Before:
-
-```ts
-page.searchProduct();
-```
+page.searchProduct()
 
 After healing:
+page.searchForProduct()
 
-```ts
-page.searchLabTest();
-```
+Framework automatically updates:
+- generated spec file
+- healed spec references
 
-Spec files are automatically updated.
+No manual changes required.
 
----
+==================================================
+# SELECTIVE HEALING
+==================================================
 
-## Incremental Framework Generation
-
-Framework intelligently reuses existing pages.
-
-It will:
-
-- merge missing methods
-- avoid duplicate pages
-- preserve existing code
-- create only new spec files
-
----
-
-## Smart Page Merging
-
-Existing POM files are never overwritten blindly.
+# When a test fails:
 
 Framework:
+1. analyzes Playwright logs
+2. detects failed page
+3. heals ONLY failed page
+4. updates locators
+5. synchronizes spec methods
+6. reruns failed spec
 
-- appends only missing methods
-- skips duplicate methods
-- preserves custom logic
+Existing pages remain untouched.
 
----
+==================================================
+# FAILURE ANALYSIS AI
+==================================================
 
-## Selective Healing
+# AI analyzes:
+- selector failures
+- timing issues
+- assertions
+- navigation failures
+- API issues
+- stale elements
+- detached DOM
+- environment issues
 
-Healing runs ONLY on:
+Returns:
 
-- newly generated spec
-- failed page object
+{
+  "rootCause": "",
+  "category": "",
+  "confidence": "",
+  "failedPage": "",
+  "failedLocator": "",
+  "recommendedLocator": "",
+  "fixSuggestion": ""
+}
 
-Existing tests remain untouched.
+==================================================
+# FOLDER STRUCTURE
+==================================================
 
----
+project/
 
-## Automatic Validation
+├── agents/
+├── prompts/
+├── playwright/
+│   ├── pages/
+│   ├── tests/
+│   ├── constants/
+│
+├── orchestrator.ts
+├── playwright.config.ts
+└── README.md
 
-Framework auto-fixes:
+==================================================
+# IMPORTANT COMPONENTS
+==================================================
 
-- missing BasePage
-- missing inheritance
-- malformed AI structure
-- invalid responses
-- missing constants
+# generateTests()
+- Generates manual test cases from prompts
 
-before failing generation.
+# validateTests()
+- Improves:
+  - clarity
+  - assertions
+  - edge cases
+  - navigation
+  - automation readiness
 
----
-
-# Existing Framework Reuse
-
-The framework reads existing pages before generation.
-
-Behavior:
-
-- Existing methods are preserved
-- Missing methods are merged
-- Duplicate methods are skipped
-- Existing specs are untouched
-- Only new specs are generated
-
----
-
-# Selective Spec Execution
-
-Framework runs ONLY newly generated specs during healing.
+# generateNavigationPlan()
+- Converts manual tests into executable browser actions
 
 Example:
 
-```bash
-npx playwright test tests/newFeature.spec.ts
-```
+{
+  "startUrl": "/login",
+  "steps": [
+    {
+      "action": "fill",
+      "selector": "#username",
+      "value": "admin"
+    }
+  ]
+}
 
----
+# buildDOMTimeline()
+- Executes navigation plan in real browser
+- Captures:
+  - locators
+  - roles
+  - labels
+  - placeholders
+  - text
+  - test IDs
+  - DOM metadata
 
-# Method Synchronization
+# generateAutomation()
+- Creates:
+  - Playwright spec
+  - Page Objects
+  - constants
+  - reusable methods
 
-When healing changes methods, all related spec files are automatically updated.
+# healFramework()
+- Self-heals failed automation
+- Updates spec methods automatically
 
----
+==================================================
+# PROMPT ARCHITECTURE
+==================================================
 
-# Intelligent Failed Page Detection
+# Generate Prompt
+- Playwright code generation
+- POM creation
+- modular architecture
 
-Framework extracts failed page automatically from Playwright logs.
+# Validation Prompt
+- atomic actions
+- assertions
+- edge cases
+- automation-friendly steps
 
-Only the failed page is healed.
+# Enrich Prompt
+Provides:
+- DOM timeline
+- locator rules
+- framework rules
+- existing framework context
 
----
+==================================================
+# RUN FRAMEWORK
+==================================================
 
-# DOM Timeline System
+Install dependencies:
 
-Framework captures:
-
-- page structure
-- locators
-- labels
-- text
-- roles
-- placeholders
-
-during runtime navigation.
-
-This improves locator healing accuracy.
-
----
-
-# AI Safety Rules
-
-Framework prevents AI from:
-
-- overwriting unrelated pages
-- deleting methods
-- renaming files randomly
-- regenerating entire framework
-
----
-
-# Project Structure
-
-```text
-playwright/
-├── pages/
-├── tests/
-├── constants/
-├── recordings/
-```
-
----
-
-# Installation
-
-## Clone Repository
-
-```bash
-git clone <repo-url>
-cd playwright-ai-framework
-```
-
----
-
-## Install Dependencies
-
-```bash
 npm install
-```
 
----
+Install Playwright:
 
-## Install Playwright Browsers
-
-```bash
 npx playwright install
-```
 
----
+Run framework:
 
-# Environment Setup
-
-Create `.env`
-
-```env
-GOOGLE_API_KEY=your_api_key
-```
-
----
-
-# Run Framework
-
-```bash
 npm run start
-```
 
----
+==================================================
+# HEALING FLOW
+==================================================
 
-# AI Workflow
-
-```text
-Manual Test Case
-       ↓
-AI Test Generation
-       ↓
-Navigation Planning
-       ↓
-DOM Timeline Capture
-       ↓
-Framework Generation
-       ↓
-Playwright Execution
-       ↓
-Failure Analysis
-       ↓
-Selective Healing
-       ↓
-Re-run Failed Spec
-```
-
----
-
-# Healing Workflow
-
-```text
 Test Failure
-   ↓
-Analyze Failure
-   ↓
+    ↓
+Analyze Logs
+    ↓
 Detect Failed Page
-   ↓
-Heal ONLY Failed Page
-   ↓
+    ↓
+Heal Page
+    ↓
 Update Spec Methods
-   ↓
-Re-run Failed Spec
-```
+    ↓
+Rerun Failed Spec
 
----
+==================================================
+# MCP CONFIGURATION
+==================================================
 
-# Supported Locator Strategies
+{
+  "servers": {
+    "playwright-test": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "playwright",
+        "run-test-mcp-server"
+      ]
+    }
+  }
+}
 
-Framework prefers:
+==================================================
+# FUTURE AI CAPABILITIES
+==================================================
 
-- `getByRole()`
-- `getByLabel()`
-- `getByTestId()`
-- `locator().filter()`
+# Possible future enhancements:
 
-Framework avoids:
-
-- `nth-child`
-- generic div locators
-- unstable CSS chains
-- broad `getByText()`
-
----
-
-# Troubleshooting
-
-## Error: Failed page not found in logs
-
-Cause:
-
-- Playwright stack trace missing page reference
-
-Fix:
-
-- ensure failures occur inside POM methods
-- avoid direct locators inside specs
-
----
-
-## Error: Failed generating framework
-
-Cause:
-
-- malformed AI response
-
-Fix:
-
-- retry generation
-- validate Gemini API key
-- check AI response structure
-
----
-
-# Recommended Practices
-
-Use:
-
-- data-testid
-- accessible labels
-- semantic HTML
-- stable IDs
-
-Avoid:
-
-- nth-child
-- random CSS classes
-- dynamic XPath
-- broad text selectors
-
----
-
-# Scripts
-
-## Start Framework
-
-```bash
-npm run start
-```
-
-## Run Playwright Tests
-
-```bash
-npx playwright test
-```
-
----
-
-# Technologies Used
-
-- Playwright
-- TypeScript
-- Gemini AI
-- MCP Observer
-- Node.js
-
----
-
-# Future Roadmap
-
-- multi-page healing
-- visual AI healing
-- screenshot diff healing
+- fully autonomous testing
+- self-maintaining automation
+- visual validation AI
+- API contract healing
+- auto-generated assertions
+- autonomous regression packs
 - flaky test detection
-- CI/CD integration
+- AI bug triaging
+- root cause clustering
+- smart retry systems
 
----
+==================================================
+# BEST PRACTICES
+==================================================
 
-# Created By
+# Recommended:
+- use data-testid
+- use reusable methods
+- use atomic test steps
+- keep assertions explicit
+- avoid unstable selectors
+
+# Avoid:
+- sleeps
+- nth-child
+- weak locators
+- duplicate page methods
+
+==================================================
+# AUTHOR
+==================================================
 
 Naman Kumar

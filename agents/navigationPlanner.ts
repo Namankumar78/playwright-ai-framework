@@ -1,20 +1,13 @@
 import { model } from '../playwright.config.js';
+import path from 'path';
+import fs from 'fs';
 
-export async function generateNavigationPlan(manualTest: string) {
-  const prompt = `
-Convert this manual test into a browser navigation plan.
+export async function generateNavigationPlan(manualTest: string) {  
+  const promptPath = path.resolve('prompts/healing.prompt.txt');
+  const promptTemplate = fs.readFileSync(promptPath, 'utf-8');
 
-Return ONLY JSON.
+  // 🔄 Inject test cases
+  const finalPrompt = promptTemplate.replace('{{testCases}}', manualTest);
 
-FORMAT:
-{
-  "startUrl": "",
-  "steps": []
-}
-
-TEST:
-${manualTest}
-`;
-
-  return await model.generateContent(prompt);
+  return await model.generateContent(finalPrompt);
 }
